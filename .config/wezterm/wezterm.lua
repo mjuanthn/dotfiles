@@ -132,9 +132,6 @@ local config = {
 			mods = "CMD|SHIFT",
 			action = wezterm.action.TogglePaneZoomState,
 		},
-		{ key = "S", mods = "LEADER", action = wezterm.action({ EmitEvent = "save_session" }) },
-		{ key = "L", mods = "LEADER", action = wezterm.action({ EmitEvent = "load_session" }) },
-		{ key = "R", mods = "LEADER", action = wezterm.action({ EmitEvent = "restore_session" }) },
 		{
 			mods = "CTRL",
 			key = "j",
@@ -209,18 +206,5 @@ end)
 local bar = require("plugins.wezbar")
 bar.apply_to_config(config)
 
--- session mana
-local session_manager = require("plugins/session-manager/session-manager")
-wezterm.on("save_session", function(window)
-	session_manager.save_state(window)
-end)
-wezterm.on("load_session", function(window)
-	session_manager.load_state(window)
-end)
-wezterm.on("restore_session", function(window)
-	session_manager.restore_state(window)
-end)
-
 -- append following keymap to current config
-
 return config
