@@ -7,7 +7,7 @@
   },
   {
     "key": "ctrl+shift+g",
-    "command": "-workbench.view.scm",
+    "command": "workbench.view.scm",
     "when": "workbench.scm.active"
   },
   {
@@ -17,7 +17,7 @@
   },
   {
     "key": "ctrl+shift+g",
-    "command": "-workbench.view.scm",
+    "command": "workbench.view.scm",
     "when": "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
   },
   {
@@ -45,7 +45,7 @@
     "command": "-maximizeterminal.openMaximizedTerminal",
     "when": "!activeAuxiliary && !activePanel && !config.maximizeterminal.useAlternativeKeybinding"
   },
-    // Navigation
+  // Navigation
   {
     "key": "ctrl-h",
     "command": "workbench.action.navigateLeft"
@@ -53,14 +53,6 @@
   {
     "key": "ctrl-l",
     "command": "workbench.action.navigateRight"
-  },
-  {
-    "key": "ctrl-k",
-    "command": "workbench.action.navigateUp"
-  },
-  {
-    "key": "ctrl-j",
-    "command": "workbench.action.navigateDown"
   },
   {
     "key": "space ,",
@@ -82,13 +74,7 @@
     "command": "workbench.action.previousEditorInGroup",
     "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
   },
-
   // Coding
-  {
-    "key": "shift-j",
-    "command": "editor.action.moveLinesDownAction",
-    "when": "vim.mode != 'Insert' && editorTextFocus"
-  },
   {
     "key": "shift-k",
     "command": "editor.action.moveLinesUpAction",
@@ -148,7 +134,10 @@
     "command": "extension.multiCommand.execute",
     "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)",
     "args": {
-      "sequence": ["workbench.view.scm", "workbench.scm.focus"]
+      "sequence": [
+        "workbench.view.scm",
+        "workbench.scm.focus"
+      ]
     }
   },
   {
@@ -156,7 +145,6 @@
     "command": "editor.action.addSelectionToNextFindMatch",
     "when": "(vim.mode == 'Normal' || vim.mode == 'Visual') && (editorTextFocus || !inputFocus)"
   },
-
   // File Explorer
   {
     "key": "r",
@@ -265,8 +253,32 @@
     "when": "!isIOS"
   },
   {
-    "key": "ctrl+cmd+f",
-    "command": "-workbench.action.toggleFullScreen",
-    "when": "!isIOS"
+    "key": "ctrl+k",
+    "command": "-deleteAllRight",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "-extension.vim_ctrl+k",
+    "when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl"
+  },
+  {
+    "key": "f8",
+    "command": "-editor.action.marker.nextInFiles",
+    "when": "editorFocus"
+  },
+  {
+    "key": "space j",
+    "command": "editor.action.marker.nextInFiles",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  {
+    "key": "space k",
+    "command": "editor.action.marker.prevInFiles",
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "workbench.action.files.save",
   }
 ]

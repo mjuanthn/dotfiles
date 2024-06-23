@@ -122,7 +122,9 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.validate": ["javascript"],
+  "eslint.validate": [
+    "javascript"
+  ],
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
@@ -150,11 +152,7 @@
   "fonted.font": "Berkeley Mono",
   "editor.formatOnPaste": true,
   "[vue]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  },
-  "extensions.experimental.affinity": {
-    "vscodevim.vim": 1,
-    "asvetliakov.vscode-neovim": 1
+    "editor.defaultFormatter": "Vue.volar"
   },
   "terminal.integrated.customGlyphs": true,
   "window.titleBarStyle": "native",
@@ -182,8 +180,6 @@
   },
   "apc.menubar.compact": true,
   "apc.stylesheet": {
-    ".title-actions": "opacity: 0 !important; transition: opacity 0.2s ease-in-out !important",
-    ".title-actions:hover": "opacity: 1 !important",
     ".quick-input-widget.show-file-icons": "box-shadow: none !important",
     ".editor-widget.find-widget": "box-shadow: none !important",
     ".panel .composite.title": "opacity: 0 !important; padding-top: 6px; padding-left: 4rem; border: none !important; transition: opacity 0.2s ease-in-out !important;",
@@ -192,13 +188,15 @@
     ".monaco-scrollable-element > .shadow.top": "display: none !important",
     ".monaco-workbench .monaco-list:not(.element-focused):focus:before": "outline: none !important",
     // editor title
-    ".editor-group-container > .title": "background-color: transparent !important; display: flex;",
-    ".editor-group-container > .title > .label-container": "height: 34px !important; background-color: transparent !important",
+    ".title .title-actions": "opacity: 0 !important; transition: opacity 0.2s ease-in-out !important",
+    ".title:hover .title-actions": "opacity: 1 !important",
+    ".editor-group-container > .title": "background-color: #1D2021 !important; transition: all 0.2s ease-in-out !important",
+    ".editor-group-container > .title > .label-container": "padding-top: .4rem !important; background-color: transparent !important",
     ".editor-group-container > .title > .label-container > .title-label": "padding-left: 6px !important",
     ".editor-group-container > .title > .title-actions": "height: 34px !important; background-color: transparent !important",
     ".editor-group-container > .title .label-name": "background-color: #272626; border-radius: .23rem; padding: .2rem .4rem; font-size: 12px !important;",
     ".editor-group-container > .title .label-description": "font-size: 10px !important",
-    // ".editor-group-container > .title .label-description:before": "content: ' [' !important; font-family: 'JetBrainsMono Nerd Font' !important; font-size: 10px !important;",
+    ".editor-group-container > .title .label-description:before": "content: '  ' !important; font-family: 'JetBrainsMono Nerd Font' !important; font-size: 10px !important;",
     // ".editor-group-container > .title .label-description:after": "content: ']' !important",
     ".statusbar": "background-color: transparent !important; --status-border-top-color: transparent !important",
     // sidebar
@@ -217,18 +215,10 @@
   "editor.accessibilitySupport": "off",
   "github.copilot.editor.enableAutoCompletions": true,
   "vue.autoInsert.dotValue": true,
-  "[jsonc]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  },
   "workbench.sideBar.location": "right",
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "workbench.colorTheme": "gruvboxConcoctis dark hard",
   "workbench.editor.showTabs": "single",
   "window.zoomLevel": 1,
   "editor.fontSize": 13,
-  "workbench.editor.splitOnDragAndDrop": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.enableDragAndDrop": false,
   "editor.dragAndDrop": false,
@@ -249,6 +239,84 @@
   "zenMode.showTabs": "single",
   "workbench.preferredDarkColorTheme": "Gruvbox ish Dark Hard",
   "editor.stickyScroll.enabled": false,
+  "editor.colorDecorators": false,
+  "editor.colorDecoratorsActivatedOn": "click",
+  // vim
+  "vim.leader": "<space>",
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.highlightedyank.enable": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "j",
+        "j"
+      ],
+      "after": [
+        "<Esc>",
+        "<Esc>",
+      ]
+    },
+    {
+      "before": [
+        "k",
+        "k"
+      ],
+      "after": [
+        "<Esc>",
+        "<Esc>",
+      ]
+    },
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": [
+        "<C-d>"
+      ],
+      "after": [
+        "<C-d>",
+        "z",
+        "z"
+      ],
+    },
+    {
+      "before": [
+        "<C-u>"
+      ],
+      "after": [
+        "<C-u>",
+        "z",
+        "z"
+      ],
+    }
+  ],
+  "vim.visualModeKeyBindings": [],
+  "vim.insertModeKeyBindingsNonRecursive": [],
+  "vim.normalModeKeyBindingsNonRecursive": [],
+  "vim.visualModeKeyBindingsNonRecursive": [],
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1,
+    "asvetliakov.vscode-neovim": 1
+  },
+  "notebook.dragAndDropEnabled": false,
+  "workbench.editor.autoLockGroups": {
+    "default": true,
+    "workbench.editor.chatSession": true,
+    "workbench.editorinputs.searchEditorInput": true,
+    "workbench.editors.gettingStartedInput": true,
+    "jupyter-notebook": true,
+    "imagePreview.previewEditor": true,
+    "vscode.audioPreview": true,
+    "vscode.videoPreview": true,
+    "jsProfileVisualizer.cpuprofile.table": true,
+    "jsProfileVisualizer.heapprofile.table": true,
+    "jsProfileVisualizer.heapsnapshot.table": true,
+    "gitlens.rebase": true,
+    "workbench.input.interactive": true,
+    "mainThreadWebview-markdown.preview": true
+  },
   "workbench.statusBar.visible": false,
-  "vim.useSystemClipboard": true
 }
