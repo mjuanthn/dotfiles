@@ -198,8 +198,8 @@
     ".editor-group-container > .title > .title-actions": "height: 34px !important; background-color: transparent !important",
     ".editor-group-container > .title .label-name": "background-color: #272626; border-radius: .23rem; padding: .2rem .4rem; font-size: 12px !important;",
     ".editor-group-container > .title .label-description": "font-size: 10px !important",
-    ".editor-group-container > .title .label-description:before": "content: ' [' !important; font-family: 'JetBrainsMono Nerd Font' !important; font-size: 10px !important;",
-    ".editor-group-container > .title .label-description:after": "content: ']' !important",
+    // ".editor-group-container > .title .label-description:before": "content: ' [' !important; font-family: 'JetBrainsMono Nerd Font' !important; font-size: 10px !important;",
+    // ".editor-group-container > .title .label-description:after": "content: ']' !important",
     ".statusbar": "background-color: transparent !important; --status-border-top-color: transparent !important",
     // sidebar
     ".sidebar": "border: none !important; background-color: transparent !important",
@@ -222,7 +222,7 @@
   },
   "workbench.sideBar.location": "right",
   "[typescript]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "workbench.colorTheme": "gruvboxConcoctis dark hard",
   "workbench.editor.showTabs": "single",
@@ -241,12 +241,14 @@
   "editor.glyphMargin": false,
   "terminal.integrated.fontFamily": "Berkeley Mono",
   "terminal.integrated.lineHeight": 1.28,
-  "workbench.statusBar.visible": false,
   "accessibility.signals.noInlayHints": {
     "sound": "off"
   },
   "workbench.activityBar.location": "hidden",
   "workbench.editor.tabActionCloseVisibility": false,
   "zenMode.showTabs": "single",
-  "workbench.preferredDarkColorTheme": "Gruvbox ish Dark Hard"
+  "workbench.preferredDarkColorTheme": "Gruvbox ish Dark Hard",
+  "editor.stickyScroll.enabled": false,
+  "workbench.statusBar.visible": false,
+  "vim.useSystemClipboard": true
 }
