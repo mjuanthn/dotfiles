@@ -155,7 +155,6 @@
     "editor.defaultFormatter": "Vue.volar"
   },
   "terminal.integrated.customGlyphs": true,
-  "window.titleBarStyle": "native",
   "apc.electron": {
     "titleBarStyle": "hiddenInset",
   },
@@ -216,7 +215,7 @@
   "github.copilot.editor.enableAutoCompletions": true,
   "vue.autoInsert.dotValue": true,
   "workbench.sideBar.location": "right",
-  "workbench.editor.showTabs": "single",
+  "workbench.editor.showTabs": false,
   "window.zoomLevel": 1,
   "editor.fontSize": 13,
   "explorer.confirmDragAndDrop": false,
@@ -319,4 +318,7 @@
     "mainThreadWebview-markdown.preview": true
   },
   "workbench.statusBar.visible": false,
+  "workbench.activityBar.visible": false,
+  "workbench.colorTheme": "Gruvbox ish Dark Hard",
+  "window.titleBarStyle": "native",
 }
