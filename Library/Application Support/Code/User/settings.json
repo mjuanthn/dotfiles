@@ -54,7 +54,7 @@
   "editor.detectIndentation": true,
   "editor.multiCursorModifier": "ctrlCmd",
   "files.insertFinalNewline": true,
-  "window.nativeFullScreen": true,
+  "window.nativeFullScreen": false,
   "window.newWindowDimensions": "inherit",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.tabCloseButton": "off",
@@ -151,9 +151,6 @@
   "terminal.integrated.smoothScrolling": true,
   "fonted.font": "Berkeley Mono",
   "editor.formatOnPaste": true,
-  "[vue]": {
-    "editor.defaultFormatter": "Vue.volar"
-  },
   "terminal.integrated.customGlyphs": true,
   "apc.electron": {
     "titleBarStyle": "hiddenInset",
@@ -215,7 +212,7 @@
   "github.copilot.editor.enableAutoCompletions": true,
   "vue.autoInsert.dotValue": true,
   "workbench.sideBar.location": "right",
-  "workbench.editor.showTabs": false,
+  "workbench.editor.showTabs": "single",
   "window.zoomLevel": 1,
   "editor.fontSize": 13,
   "explorer.confirmDragAndDrop": false,
@@ -317,8 +314,10 @@
     "workbench.input.interactive": true,
     "mainThreadWebview-markdown.preview": true
   },
-  "workbench.statusBar.visible": false,
-  "workbench.activityBar.visible": false,
   "workbench.colorTheme": "Gruvbox ish Dark Hard",
   "window.titleBarStyle": "native",
+  "workbench.statusBar.visible": false,
+  "[vue]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
 }

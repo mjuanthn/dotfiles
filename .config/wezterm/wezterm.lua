@@ -9,6 +9,10 @@ local k = require("utils/keys")
 local wezterm = require("wezterm")
 local act = wezterm.action
 
+-- Plugins
+local bar = require("plugins.wezbar")
+local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
+
 local config = {
 	background = {
 		b.get_background(dark_opacity, light_opacity),
@@ -83,25 +87,69 @@ local config = {
 	keys = {
 		-- Clear console
 		k.cmd_key("k", wezterm.action({ ClearScrollback = "ScrollbackAndViewport" })),
-		-- Search commands
+
+		-- NVIM commands
 		k.cmd_key("p", k.multiple_actions(":Telescope find_files")),
 		k.cmd_key("f", k.multiple_actions(":Telescope live_grep")),
 		k.cmd_key("q", k.multiple_actions(":q!")),
 		k.cmd_key("w", k.multiple_actions(":bd")),
-		-- keymap({ 'n', 'v' }, '<C-k>', '<C-u>zz')
-		-- keymap({ 'n', 'v' }, '<C-j>', '<C-d>zz')
-		k.cmd_key("N", wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" })),
-		k.cmd_key("n", wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" })),
-		k.cmd_key("s", k.multiple_actions(":wa")),
 
-		-- Save and do more nvim cmd
-		-- k.cmd_key(
-		-- 	"s",
-		-- 	act.Multiple({
-		-- 		act.SendKey({ key = "\x1b" }), -- escape
-		-- 		k.multiple_actions(":lua SaveAndDoMore()"),
-		-- 	})
-		-- ),
+		-- Panels
+		{
+			key = "J",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+		},
+
+		{
+			key = "L",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+		},
+
+		-- Exit current mode, multicursor and save all
+		k.cmd_key(
+			"s",
+			act.Multiple({
+				act.SendKey({ key = "\x1b" }), -- escape
+				act.SendKey({ key = "\x1b" }), -- escape
+				k.multiple_actions(":wa"),
+			})
+		),
+
+		-- Workspaces
+
+		-- Change workspace
+		{
+			key = "W",
+			mods = "CMD|SHIFT",
+			-- action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+			action = workspace_switcher.switch_workspace(),
+		},
+
+		-- New workspace (prompt name)
+		{
+			key = "N",
+			mods = "CMD|SHIFT",
+			action = act.PromptInputLine({
+				description = wezterm.format({
+					{ Attribute = { Intensity = "Bold" } },
+					{ Foreground = { Color = "#E6CD9A" } },
+					{ Text = "Enter name for new workspace" },
+				}),
+				action = wezterm.action_callback(function(window, pane, line)
+					if line then
+						window:perform_action(
+							act.SwitchToWorkspace({
+								name = line,
+							}),
+							pane
+						)
+					end
+				end),
+			}),
+		},
+
 		-- Close current buffer
 		k.cmd_key(
 			"w",
@@ -110,11 +158,7 @@ local config = {
 				k.multiple_actions(":bd"),
 			})
 		),
-		{
-			key = "W",
-			mods = "CMD|SHIFT",
-			action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
-		},
+
 		{
 			key = "r",
 			mods = "CMD",
@@ -127,28 +171,11 @@ local config = {
 				end),
 			}),
 		},
+
 		{
 			key = "M",
 			mods = "CMD|SHIFT",
 			action = wezterm.action.TogglePaneZoomState,
-		},
-		{
-			mods = "CTRL",
-			key = "j",
-			action = act.Multiple({
-				act.SendKey({ mods = "CTRL", key = "d" }),
-				act.SendKey({ key = "z" }),
-				act.SendKey({ key = "z" }),
-			}),
-		},
-		{
-			mods = "CTRL",
-			key = "k",
-			action = act.Multiple({
-				act.SendKey({ mods = "CTRL", key = "u" }),
-				act.SendKey({ key = "z" }),
-				act.SendKey({ key = "z" }),
-			}),
 		},
 	},
 }
@@ -202,9 +229,9 @@ wezterm.on("window-resized", function(window, pane)
 	readjust_font_size(window, pane)
 end)
 
--- Plugins
-local bar = require("plugins.wezbar")
+-- Apply plugins
 bar.apply_to_config(config)
+workspace_switcher.apply_to_config(config)
 
 -- append following keymap to current config
 return config

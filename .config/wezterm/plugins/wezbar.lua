@@ -141,6 +141,30 @@ local find_git_dir = function(directory)
 	return nil
 end
 
+-- Kills a workspace closing all the panels
+--
+local function kill_wokspace(workspace)
+	return function(window, pane, line)
+		workspace = workspace or window:get_active_workspace()
+		local success, stdout = wez.run_child_process({ "wezterm", "cli", "list", "--format=json" })
+
+		if success then
+			local json = wez.json_parse(stdout)
+			if not json then
+				return
+			end
+
+			local workspace_panes = u.filter(json, function(p)
+				return p.workspace == workspace
+			end)
+
+			for _, p in ipairs(workspace_panes) do
+				wez.run_child_process({ "wezterm", "cli", "kill-pane", "--pane-id=" .. p.pane_id })
+			end
+		end
+	end
+end
+
 local get_cwd_hostname = function(pane, search_git_root_instead)
 	local cwd, hostname, full_path = "", "", ""
 	local cwd_uri = pane:get_current_working_dir()
@@ -316,6 +340,11 @@ wez.on("update-status", function(window, pane)
 		-- { Background = { Color = "#1C272B" } },
 		-- { Foreground = { Color = palette.ansi[7] } },
 		-- { Text = "  " .. config.branch_icon .. " " .. branch .. "  " },
+
+		{ Background = { Color = "#35312C" } },
+		{ Foreground = { Color = "#E6CD9A" } },
+		{ Text = " 󰆍" },
+		{ Text = " " .. window:active_workspace() .. " " },
 		--
 		-- { Foreground = { Color = "#E6CD9A" } },
 		-- { Background = { Color = "#1D282C" } },
@@ -326,7 +355,7 @@ wez.on("update-status", function(window, pane)
 		-- { Foreground = { Color = "#1D282C" } },
 		-- { Text = " " .. process_icon .. " " },
 		{ Background = { Color = palette.tab_bar.background } },
-		{ Text = " " },
+		{ Text = "  " },
 	}))
 
 	-- right status

@@ -14,12 +14,12 @@ set -x PATH $PATH ~/.config/emacs/bin
 starship init fish | source
 
 # NVim configs
-# alias nvim-next='NVIM_APPNAME=nvim-next nvim'
-# alias next='nvim-next'
+
+alias v='nvim'
 alias n='nvim'
 alias m='nvim'
-alias v='nvim'
 
+# Utils
 alias cls='clear'
 alias cl='clear'
 alias c='clear'
