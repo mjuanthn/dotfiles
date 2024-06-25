@@ -11,6 +11,7 @@ local act = wezterm.action
 
 -- Plugins
 local bar = require("plugins.wezbar")
+local panel_manager = require("plugins.panel-manager")
 local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
 
 local config = {
@@ -84,36 +85,19 @@ local config = {
 	},
 
 	-- keys
+	disable_default_key_bindings = false, -- disable custom keymaps
 	keys = {
 		-- Clear console
 		k.cmd_key("k", wezterm.action({ ClearScrollback = "ScrollbackAndViewport" })),
-
-		-- NVIM commands
-		k.cmd_key("p", k.multiple_actions(":Telescope find_files")),
-		k.cmd_key("f", k.multiple_actions(":Telescope live_grep")),
-		k.cmd_key("q", k.multiple_actions(":q!")),
-		k.cmd_key("w", k.multiple_actions(":bd")),
-
-		-- Panels
-		{
-			key = "J",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-		},
-
-		{
-			key = "L",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-		},
-
 		-- Exit current mode, multicursor and save all
 		k.cmd_key(
 			"s",
 			act.Multiple({
 				act.SendKey({ key = "\x1b" }), -- escape
+				k.multiple_actions(":wa"), -- save all
 				act.SendKey({ key = "\x1b" }), -- escape
-				k.multiple_actions(":wa"),
+				act.SendKey({ key = "\x1b" }), -- escape
+				act.SendKey({ key = "\x1b" }), -- escape
 			})
 		),
 
@@ -232,6 +216,7 @@ end)
 -- Apply plugins
 bar.apply_to_config(config)
 workspace_switcher.apply_to_config(config)
+panel_manager.apply_to_config(config)
 
 -- append following keymap to current config
 return config

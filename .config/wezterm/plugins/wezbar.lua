@@ -337,14 +337,14 @@ wez.on("update-status", function(window, pane)
 
 	-- left status
 	window:set_left_status(wez.format({
+		-- { Background = { Color = "#35312C" } },
 		-- { Background = { Color = "#1C272B" } },
 		-- { Foreground = { Color = palette.ansi[7] } },
 		-- { Text = "  " .. config.branch_icon .. " " .. branch .. "  " },
+		-- { Text = " 󰆍" },
 
-		{ Background = { Color = "#35312C" } },
 		{ Foreground = { Color = "#E6CD9A" } },
-		{ Text = " 󰆍" },
-		{ Text = " " .. window:active_workspace() .. " " },
+		{ Text = "  " .. window:active_workspace() .. "  " },
 		--
 		-- { Foreground = { Color = "#E6CD9A" } },
 		-- { Background = { Color = "#1D282C" } },
@@ -354,8 +354,7 @@ wez.on("update-status", function(window, pane)
 		-- { Background = { Color = "#E6CD9A" } },
 		-- { Foreground = { Color = "#1D282C" } },
 		-- { Text = " " .. process_icon .. " " },
-		{ Background = { Color = palette.tab_bar.background } },
-		{ Text = "  " },
+		-- { Text = "  " },
 	}))
 
 	-- right status
