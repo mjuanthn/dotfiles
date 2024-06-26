@@ -88,19 +88,28 @@ wezterm.on("CloseCurrentPanel", function(window, pane)
 	)
 end)
 
-function spawnCommand(cmd)
-	local tab, pane, window = mux.spawn_window(cmd or {})
-	-- Create a right side pane
-	local right_pane = pane:split({ direction = "Right", size = 0.4 })
-	-- Split right pane into two, with new pane on bottom
-	local bottom_pane = right_pane:split({ direction = "Bottom" })
-	-- Activate primary left pame
-	pane:activate()
-end
+wezterm.on("EditorFindCommand-p", function(window, pane)
+	conditionalExecuteAction(
+		window,
+		pane,
+		k.multiple_actions(":Telescope find_files"),
+		wezterm.action.ActivateCommandPalette
+	)
+end)
+
+wezterm.on("EditorFindCommand-f", function(window, pane)
+	conditionalExecuteAction(
+		window,
+		pane,
+		k.multiple_actions(":Telescope live_grep"),
+		wezterm.action.Search({ CaseSensitiveString = "" })
+	)
+end)
 
 M.apply_to_config = function(config)
 	config.unix_domains = { { name = "unix" } }
 	local new_keys = {
+		{ key = "P", mods = "CMD|SHIFT", action = wezterm.action.ActivateCommandPalette },
 		{ key = "h", mods = "CTRL", action = wezterm.action.EmitEvent("ActivatePaneDirection-left") },
 		{ key = "j", mods = "CTRL", action = wezterm.action.EmitEvent("ActivatePaneDirection-down") },
 		{ key = "k", mods = "CTRL", action = wezterm.action.EmitEvent("ActivatePaneDirection-up") },
@@ -135,7 +144,7 @@ M.apply_to_config = function(config)
 			action = act.AdjustPaneSize({ "Right", 5 }),
 		},
 
-		-- Panels: move
+		-- Panels: movek.cmd_key("p",
 		{
 			key = "h",
 			mods = "CTRL",
@@ -154,8 +163,8 @@ M.apply_to_config = function(config)
 		},
 
 		-- NVIM commands
-		k.cmd_key("p", k.multiple_actions(":Telescope find_files")),
-		k.cmd_key("f", k.multiple_actions(":Telescope live_grep")),
+		{ key = "p", mods = "CMD", action = wezterm.action.EmitEvent("EditorFindCommand-p") },
+		{ key = "f", mods = "CMD", action = wezterm.action.EmitEvent("EditorFindCommand-f") },
 		{ key = "q", mods = "CMD", action = wezterm.action.EmitEvent("KillEditorPanel") },
 		{ key = "w", mods = "CMD", action = wezterm.action.EmitEvent("CloseCurrentPanel") },
 	}

@@ -1,5 +1,8 @@
 local M = {
   "j-morano/buffer_manager.nvim",
+  priority = 1000,
+  event = "VeryLazy",
+  lazy,
 }
 
 M.config = function()
@@ -34,6 +37,7 @@ M.config = function()
   -- Just the menu
   map({ "t", "n" }, "<leader><space>", bmui.toggle_quick_menu, opts)
   -- Open menu and search
+  local bmui = require("buffer_manager.ui")
   map({ "t", "n" }, "<M-l>", function()
     bmui.toggle_quick_menu()
     -- wait for the menu to open

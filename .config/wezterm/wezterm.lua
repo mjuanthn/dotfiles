@@ -52,6 +52,9 @@ local config = {
 	window_decorations = "RESIZE",
 	show_new_tab_button_in_tab_bar = false,
 	tab_max_width = 900,
+	command_palette_font_size = 16.0,
+	command_palette_bg_color = "#1A1C1D",
+	command_palette_fg_color = "#749A92",
 
 	colors = {
 		tab_bar = {
@@ -158,7 +161,7 @@ local config = {
 
 		{
 			key = "M",
-			mods = "CMD|SHIFT",
+			mods = "CTRL|SHIFT",
 			action = wezterm.action.TogglePaneZoomState,
 		},
 	},
