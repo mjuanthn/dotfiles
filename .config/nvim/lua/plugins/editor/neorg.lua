@@ -2,6 +2,13 @@ return {
   {
     "nvim-neorg/neorg",
     ft = "norg",
+    dependencies = {
+      {
+        "vhyrro/luarocks.nvim",
+        priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+        config = true,
+      },
+    },
     opts = {
       load = {
         ["core.defaults"] = {},
