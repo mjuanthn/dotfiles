@@ -54,7 +54,7 @@
   "editor.detectIndentation": true,
   "editor.multiCursorModifier": "ctrlCmd",
   "files.insertFinalNewline": true,
-  "window.nativeFullScreen": false,
+  "window.nativeFullScreen": true,
   "window.newWindowDimensions": "inherit",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.tabCloseButton": "off",
@@ -316,8 +316,11 @@
   },
   "workbench.colorTheme": "Gruvbox ish Dark Hard",
   "window.titleBarStyle": "native",
-  "workbench.statusBar.visible": false,
   "[vue]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "workbench.statusBar.visible": false,
 }

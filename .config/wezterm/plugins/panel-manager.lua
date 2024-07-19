@@ -1,9 +1,8 @@
+local M = {}
+
 local wezterm = require("wezterm")
 local act = wezterm.action
-local mux = wezterm.mux
 local k = require("utils/keys")
-
-local M = {}
 
 local termEditors = { "hx", "nvim", "vim" }
 local winExt = ".exe" -- extension to add to match Windows process names
@@ -49,6 +48,14 @@ local function conditionalActivatePane(window, pane, pane_direction, vim_directi
 	end
 end
 
+local function conditionalResizePane(window, pane, pane_direction, vim_direction)
+	if isViProcess(pane) then
+		window:perform_action(wezterm.action.SendKey({ key = vim_direction, mods = "CTRL|SHIFT" }), pane)
+	else
+		window:perform_action(act.AdjustPaneSize({ pane_direction, 5 }), pane)
+	end
+end
+
 local function conditionalExecuteAction(window, pane, action_editor, action_native)
 	if isViProcess(pane) then
 		window:perform_action(action_editor, pane)
@@ -68,6 +75,20 @@ wezterm.on("ActivatePaneDirection-up", function(window, pane)
 end)
 wezterm.on("ActivatePaneDirection-down", function(window, pane)
 	conditionalActivatePane(window, pane, "Down", "j")
+end)
+
+-- Resize pane
+wezterm.on("ResizePaneDirection-right", function(window, pane)
+	conditionalResizePane(window, pane, "Right", "L")
+end)
+wezterm.on("ResizePaneDirection-left", function(window, pane)
+	conditionalResizePane(window, pane, "Left", "H")
+end)
+wezterm.on("ResizePaneDirection-up", function(window, pane)
+	conditionalResizePane(window, pane, "Up", "K")
+end)
+wezterm.on("ResizePaneDirection-down", function(window, pane)
+	conditionalResizePane(window, pane, "Down", "J")
 end)
 
 wezterm.on("KillEditorPanel", function(window, pane)
@@ -109,11 +130,18 @@ end)
 M.apply_to_config = function(config)
 	config.unix_domains = { { name = "unix" } }
 	local new_keys = {
-		{ key = "P", mods = "CMD|SHIFT", action = wezterm.action.ActivateCommandPalette },
+		-- Navigate
 		{ key = "h", mods = "CTRL", action = wezterm.action.EmitEvent("ActivatePaneDirection-left") },
 		{ key = "j", mods = "CTRL", action = wezterm.action.EmitEvent("ActivatePaneDirection-down") },
 		{ key = "k", mods = "CTRL", action = wezterm.action.EmitEvent("ActivatePaneDirection-up") },
 		{ key = "l", mods = "CTRL", action = wezterm.action.EmitEvent("ActivatePaneDirection-right") },
+		-- Resize
+		{ key = "H", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-left") },
+		{ key = "J", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-down") },
+		{ key = "K", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-up") },
+		{ key = "L", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-right") },
+
+		{ key = "P", mods = "CMD|SHIFT", action = wezterm.action.ActivateCommandPalette },
 		{
 			key = "J",
 			mods = "CTRL|SHIFT|ALT",
@@ -127,41 +155,23 @@ M.apply_to_config = function(config)
 		},
 
 		-- Panels: resize
-		{
-			key = "H",
-			mods = "CTRL|SHIFT",
-			action = act.AdjustPaneSize({ "Left", 5 }),
-		},
-		{
-			key = "J",
-			mods = "CTRL|SHIFT",
-			action = act.AdjustPaneSize({ "Down", 5 }),
-		},
-		{ key = "K", mods = "CTRL|SHIFT", action = act.AdjustPaneSize({ "Up", 5 }) },
-		{
-			key = "L",
-			mods = "CTRL|SHIFT",
-			action = act.AdjustPaneSize({ "Right", 5 }),
-		},
-
-		-- Panels: movek.cmd_key("p",
-		{
-			key = "h",
-			mods = "CTRL",
-			action = act.ActivatePaneDirection("Left"),
-		},
-		{
-			key = "j",
-			mods = "CTRL",
-			action = act.ActivatePaneDirection("Down"),
-		},
-		{ key = "k", mods = "CTRL", action = act.ActivatePaneDirection("Up") },
-		{
-			key = "l",
-			mods = "CTRL",
-			action = act.ActivatePaneDirection("Right"),
-		},
-
+		-- {
+		-- 	key = "H",
+		-- 	mods = "CTRL|SHIFT",
+		-- 	action = act.AdjustPaneSize({ "Left", 5 }),
+		-- },
+		-- {
+		-- 	key = "J",
+		-- 	mods = "CTRL|SHIFT",
+		-- 	action = act.AdjustPaneSize({ "Down", 5 }),
+		-- },
+		-- { key = "K", mods = "CTRL|SHIFT", action = act.AdjustPaneSize({ "Up", 5 }) },
+		-- {
+		-- 	key = "L",
+		-- 	mods = "CTRL|SHIFT",
+		-- 	action = act.AdjustPaneSize({ "Right", 5 }),
+		-- },
+		--
 		-- NVIM commands
 		{ key = "p", mods = "CMD", action = wezterm.action.EmitEvent("EditorFindCommand-p") },
 		{ key = "f", mods = "CMD", action = wezterm.action.EmitEvent("EditorFindCommand-f") },

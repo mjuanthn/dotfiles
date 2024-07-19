@@ -1,0 +1,15 @@
+config:
+  fallback-icon: ""
+  multi-pane-icon: ""
+  show-name: false
+
+icons:
+  fish: ""
+  multi-pane-icon: ""
+  show-name: false
+
+icons:
+  fish: ""
+  nvim: ""
+  node: ""
+  yazi: "📂"

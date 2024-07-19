@@ -1,0 +1,16 @@
+[[default_session]]
+startup_command = "nvim -c ':Telescope find_files'"
+
+[[nostromo_session]]
+startup_command = "open_nostromo_dev"
+
+
+# # [[session]]
+# # name = "Downloads 📥"
+# # path = "~/Downloads"
+# # startup_command = "ls"
+#
+# [[session]]
+# name = "NOSTROMO DEV"
+# path = "~/projects/nostromo-front"
+# startup_command = "nvim"

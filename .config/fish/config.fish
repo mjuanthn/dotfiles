@@ -14,10 +14,12 @@ set -x PATH $PATH ~/.config/emacs/bin
 starship init fish | source
 
 # NVim configs
+# alias nv='NVIM_APPNAME=nvim-min nvim'
+alias nv='nvim'
+alias n='nv'
+alias m='nv'
 
-alias v='nvim'
-alias n='nvim'
-alias m='nvim'
+# NVim next
 
 # Utils
 alias cls='clear'
@@ -38,5 +40,12 @@ fish_add_path /opt/homebrew/opt/pnpm@8/bin
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
-#tmux
+# tmux
 abbr tn "tmux new -s (pwd | sed 's/.*\///g')"
+
+# pnpm
+set -gx PNPM_HOME /Users/mjuan/Library/pnpm
+if not string match -q -- $PNPM_HOME $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
