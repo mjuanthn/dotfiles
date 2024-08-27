@@ -22,7 +22,9 @@ wezterm.on("FindCommand-p", function(window, pane)
 		window,
 		pane,
 		k.multiple_actions(":Telescope find_files"),
-		k.multiple_actions(":Telescope find_files")
+		act.ShowLauncherArgs({
+			flags = "FUZZY|WORKSPACES",
+		})
 	)
 end)
 
@@ -51,13 +53,36 @@ wezterm.on("EditorSaveAll", function(window, pane)
 	)
 end)
 
+-- Save all changes
+wezterm.on("EditorSaveAllAndQuit", function(window, pane)
+	h.conditionalExecuteAction(
+		window,
+		pane,
+		act.Multiple({
+			act.SendKey({ key = "\x1b" }),
+			k.multiple_actions(":wqa"),
+		}),
+		nil
+	)
+end)
+
 return {
 	{ key = "\x1b", mods = "CMD", action = wezterm.action.ActivateCommandPalette },
+	{ key = "n", mods = "CMD", action = act.SpawnWindow },
 
 	-- VIM commands
 	{ key = "p", mods = "CMD", action = wezterm.action.EmitEvent("FindCommand-p") },
 	{ key = "f", mods = "CMD", action = wezterm.action.EmitEvent("FindCommand-f") },
 	{ key = "s", mods = "CMD", action = wezterm.action.EmitEvent("EditorSaveAll") },
+	{ key = "q", mods = "CMD", action = wezterm.action.EmitEvent("EditorSaveAllAndQuit") },
+	{
+		key = "W",
+		mods = "CMD|SHIFT",
+		action = act.Multiple({
+			act.SendKey({ key = "\x1b" }),
+			k.multiple_actions(":bufdo bd"),
+		}),
+	},
 	{
 		key = "s",
 		mods = "CMD",

@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 local k = require("utils/keys")
 local h = require("utils/helpers")
+local act = require("wezterm").action
 
 wezterm.on("ActivatePaneDirection-right", function(window, pane)
 	h.conditionalActivatePane(window, pane, "Right", "l")
@@ -42,8 +43,12 @@ wezterm.on("CloseCurrentPanel", function(window, pane)
 	h.conditionalExecuteAction(
 		window,
 		pane,
-		k.multiple_actions(":bd"),
-		wezterm.action.CloseCurrentPane({ confirm = false })
+		--k.multiple_actions(":bd"),
+		act.Multiple({
+			-- act.SendKey({ key = "\x1b" }), -- escape
+			-- k.multiple_actions(":bd"),
+		}),
+		wezterm.action.CloseCurrentPane({ confirm = true })
 	)
 end)
 
@@ -56,29 +61,30 @@ return {
 	{ key = "l", mods = "CTRL", action = wezterm.action.EmitEvent("ActivatePaneDirection-right") },
 
 	-- Resize
-	{ key = "H", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-left") },
-	{ key = "J", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-down") },
-	{ key = "K", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-up") },
-	{ key = "L", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-right") },
+	-- { key = "H", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-left") },
+	-- { key = "J", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-down") },
+	-- { key = "K", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-up") },
+	-- { key = "L", mods = "CTRL|SHIFT", action = wezterm.action.EmitEvent("ResizePaneDirection-right") },
 
 	-- Close
+	{ key = "w", mods = "CMD", action = wezterm.action.EmitEvent("CloseCurrentPanel") },
 	-- k.cmd_key(
 	-- 	"w",
 	-- 	act.Multiple({
 	-- 		act.SendKey({ key = "\x1b" }), -- escape
 	-- 		k.multiple_actions(":bd"),
 	-- 	})
-	-- )
+	-- ),
 
 	-- Split
 	{
 		key = "J",
-		mods = "CTRL|SHIFT|ALT",
+		mods = "CMD|SHIFT",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{
 		key = "L",
-		mods = "CTRL|SHIFT|ALT",
+		mods = "CMD|SHIFT",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 
@@ -99,7 +105,7 @@ return {
 	-- Maximize pane
 	{
 		key = "M",
-		mods = "CMD|SHIFT",
+		mods = "CMD",
 		action = wezterm.action.TogglePaneZoomState,
 	},
 }

@@ -99,28 +99,28 @@ return {
 	-- },
 
 	-- Change workspace
-	{
-		key = "L",
-		mods = "CMD|SHIFT",
-		action = wezterm.action_callback(function(window, pane)
-			local last = wezterm.GLOBAL.last_open_workspace
-			wezterm.GLOBAL.last_open_workspace = window:active_workspace()
-			window:perform_action(wezterm.action.SwitchToWorkspace({ name = last }), pane)
-		end),
-	},
-	{
-		key = "m",
-		mods = "LEADER|CTRL",
-		action = wezterm.action({
-			SpawnCommandInNewTab = {
-				args = { "lazygit" },
-				set_environment_variables = {
-					PATH = "/opt/homebrew/bin:" .. os.getenv("PATH"),
-					XDG_CONFIG_HOME = string.format("%s/%s", home, ".config"),
-				},
-			},
-		}),
-	},
+	-- {
+	-- 	key = "L",
+	-- 	mods = "CMD|SHIFT",
+	-- 	action = wezterm.action_callback(function(window, pane)
+	-- 		local last = wezterm.GLOBAL.last_open_workspace
+	-- 		wezterm.GLOBAL.last_open_workspace = window:active_workspace()
+	-- 		window:perform_action(wezterm.action.SwitchToWorkspace({ name = last }), pane)
+	-- 	end),
+	-- },
+	-- {
+	-- 	key = "m",
+	-- 	mods = "LEADER|CTRL",
+	-- 	action = wezterm.action({
+	-- 		SpawnCommandInNewTab = {
+	-- 			args = { "lazygit" },
+	-- 			set_environment_variables = {
+	-- 				PATH = "/opt/homebrew/bin:" .. os.getenv("PATH"),
+	-- 				XDG_CONFIG_HOME = string.format("%s/%s", home, ".config"),
+	-- 			},
+	-- 		},
+	-- 	}),
+	-- },
 
 	-- {
 	-- 	key = "S",
@@ -189,19 +189,11 @@ return {
 		}),
 	},
 
-	{
-		key = "k",
-		mods = "CMD",
-		action = act.ShowLauncherArgs({
-			flags = "FUZZY|WORKSPACES",
-		}),
-	},
-	-- Close current buffer
-	k.cmd_key(
-		"w",
-		act.Multiple({
-			act.SendKey({ key = "\x1b" }), -- escape
-			k.multiple_actions(":bd"),
-		})
-	),
+	-- {
+	-- 	key = "k",
+	-- 	mods = "CMD",
+	-- 	action = act.ShowLauncherArgs({
+	-- 		flags = "FUZZY|WORKSPACES",
+	-- 	}),
+	-- },
 }

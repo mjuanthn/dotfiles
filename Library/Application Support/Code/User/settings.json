@@ -2,19 +2,16 @@
   // Disable telemetry
   "telemetry.telemetryLevel": "off",
   // Zen mode
-  "zenMode.fullScreen": false,
+  "zenMode.fullScreen": true,
   "zenMode.centerLayout": false,
-  // Theming
-  "workbench.iconTheme": "quill-icons",
   "editor.fontFamily": "Berkeley Mono",
   "editor.fontLigatures": true,
   "window.autoDetectColorScheme": true,
   "editor.codeLensFontSize": 12,
   "editor.lineHeight": 1.75,
-  "editor.suggestFontSize": 15,
+  "editor.suggestFontSize": 14,
   "editor.suggestLineHeight": 28,
-  "terminal.integrated.fontSize": 13,
-  "debug.console.fontSize": 16,
+  "terminal.integrated.fontSize": 14,
   // More minimal UI
   "problems.decorations.enabled": false,
   "gitlens.codeLens.enabled": false,
@@ -46,7 +43,6 @@
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "editor.gotoLocation.multipleImplementations": "goto",
   "editor.gotoLocation.multipleTypeDefinitions": "goto",
-  "volar.icon.splitEditors": false,
   // Theme-specific UI
   "diffEditor.renderSideBySide": false,
   "editor.copyWithSyntaxHighlighting": false,
@@ -56,8 +52,6 @@
   "files.insertFinalNewline": true,
   "window.nativeFullScreen": true,
   "window.newWindowDimensions": "inherit",
-  "workbench.editor.highlightModifiedTabs": true,
-  "workbench.editor.tabCloseButton": "off",
   // Search
   "search.smartCase": true,
   "search.useIgnoreFiles": false,
@@ -100,7 +94,6 @@
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.suggest.completeFunctionCalls": true,
-  "editor.guides.indentation": false,
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "editor.unicodeHighlight.invisibleCharacters": false,
   "workbench.layoutControl.enabled": false,
@@ -122,9 +115,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.validate": [
-    "javascript"
-  ],
+  "eslint.validate": ["javascript"],
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
@@ -143,17 +134,16 @@
   "editor.parameterHints.enabled": false,
   "editor.inlayHints.enabled": "off",
   "editor.tabSize": 2,
-  "editor.lineNumbers": "off",
+  "editor.lineNumbers": "off", //"relative",
   "settingsSync.ignoredExtensions": [],
   "window.commandCenter": false,
   "workbench.list.smoothScrolling": true,
-  "editor.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
   "fonted.font": "Berkeley Mono",
   "editor.formatOnPaste": true,
   "terminal.integrated.customGlyphs": true,
   "apc.electron": {
-    "titleBarStyle": "hiddenInset",
+    "titleBarStyle": "hiddenInset"
   },
   "apc.header": {
     "height": 20
@@ -163,18 +153,14 @@
     "fontSize": 10
   },
   "apc.statusBar": {
-    "position": "editor-bottom",
-    "fontSize": 10
+    "position": "bottom", // "editor-bottom",
+    "fontSize": 11
   },
   "apc.listRow": {
-    "lists": [
-      "explorer-folders-view",
-      "quick-input-list",
-      "results",
-    ],
-    "height": 20,
+    "lists": ["explorer-folders-view", "quick-input-list", "results"],
+    "height": 20
   },
-  "apc.menubar.compact": true,
+  // "apc.menubar.compact": true,
   "apc.stylesheet": {
     ".quick-input-widget.show-file-icons": "box-shadow: none !important",
     ".editor-widget.find-widget": "box-shadow: none !important",
@@ -184,24 +170,29 @@
     ".monaco-scrollable-element > .shadow.top": "display: none !important",
     ".monaco-workbench .monaco-list:not(.element-focused):focus:before": "outline: none !important",
     // editor title
+    ".title": "--editor-group-tab-height: 22px !important; height: 34px !important; background-color: #181818 !important;",
     ".title .title-actions": "opacity: 0 !important; transition: opacity 0.2s ease-in-out !important",
     ".title:hover .title-actions": "opacity: 1 !important",
-    ".editor-group-container > .title": "background-color: #1D2021 !important; transition: all 0.2s ease-in-out !important",
     ".editor-group-container > .title > .label-container": "padding-top: .4rem !important; background-color: transparent !important",
     ".editor-group-container > .title > .label-container > .title-label": "padding-left: 6px !important",
     ".editor-group-container > .title > .title-actions": "height: 34px !important; background-color: transparent !important",
-    ".editor-group-container > .title .label-name": "background-color: #272626; border-radius: .23rem; padding: .2rem .4rem; font-size: 12px !important;",
+    ".editor-group-container > .title .label-name": "background-color: #2C2C2B; border-radius: .38rem; padding: .2rem .4rem; font-size: 12px !important;",
     ".editor-group-container > .title .label-description": "font-size: 10px !important",
     ".editor-group-container > .title .label-description:before": "content: '  ' !important; font-family: 'JetBrainsMono Nerd Font' !important; font-size: 10px !important;",
-    // ".editor-group-container > .title .label-description:after": "content: ']' !important",
-    ".statusbar": "background-color: transparent !important; --status-border-top-color: transparent !important",
+    // editor
+    ".editor-container": "height: 100% !important",
+    // statusbar
+    ".statusbar": "background-color: #181818 !important; --status-border-top-color: transparent !important; color: #4B4B49 !important; transition: color 0.1s ease-in-out !important",
+    ".statusbar:hover": "color: #D0C8C6 !important",
     // sidebar
-    ".sidebar": "border: none !important; background-color: transparent !important",
+    ".sidebar": "border: none !important; background-color: #181818 !important",
     ".sidebar .monaco-list-rows": "background-color: transparent !important",
-    ".sidebar .composite.title": "margin: 8px auto auto -7px !important;",
+    ".sidebar .composite.title": "margin: 8px auto auto -4px !important; ", // sidebar title position
     ".sidebar .title-label": "padding: 0 !important",
     ".sidebar .pane-header": "background-color: transparent !important; border-top: none !important; font-size: 10px !important",
     ".sidebar .pane-header .title": "font-size: 10px !important",
+    // extras
+    ".letterpress": "display: none !important"
   },
   "apc.font.family": "Berkeley Mono",
   "apc.monospace.font.family": "Berkeley Mono",
@@ -212,9 +203,7 @@
   "github.copilot.editor.enableAutoCompletions": true,
   "vue.autoInsert.dotValue": true,
   "workbench.sideBar.location": "right",
-  "workbench.editor.showTabs": "single",
   "window.zoomLevel": 1,
-  "editor.fontSize": 13,
   "explorer.confirmDragAndDrop": false,
   "explorer.enableDragAndDrop": false,
   "editor.dragAndDrop": false,
@@ -224,7 +213,6 @@
   "rust-analyzer.inlayHints.renderColons": false,
   "rust-analyzer.inlayHints.typeHints.enable": false,
   "rust-analyzer.inlayHints.parameterHints.enable": false,
-  "editor.glyphMargin": false,
   "terminal.integrated.fontFamily": "Berkeley Mono",
   "terminal.integrated.lineHeight": 1.28,
   "accessibility.signals.noInlayHints": {
@@ -233,66 +221,9 @@
   "workbench.activityBar.location": "hidden",
   "workbench.editor.tabActionCloseVisibility": false,
   "zenMode.showTabs": "single",
-  "workbench.preferredDarkColorTheme": "Gruvbox ish Dark Hard",
   "editor.stickyScroll.enabled": false,
   "editor.colorDecorators": false,
   "editor.colorDecoratorsActivatedOn": "click",
-  // vim
-  "vim.leader": "<space>",
-  "vim.easymotion": true,
-  "vim.incsearch": true,
-  "vim.useSystemClipboard": true,
-  "vim.useCtrlKeys": true,
-  "vim.hlsearch": true,
-  "vim.highlightedyank.enable": true,
-  "vim.insertModeKeyBindings": [
-    {
-      "before": [
-        "j",
-        "j"
-      ],
-      "after": [
-        "<Esc>",
-        "<Esc>",
-      ]
-    },
-    {
-      "before": [
-        "k",
-        "k"
-      ],
-      "after": [
-        "<Esc>",
-        "<Esc>",
-      ]
-    },
-  ],
-  "vim.normalModeKeyBindings": [
-    {
-      "before": [
-        "<C-d>"
-      ],
-      "after": [
-        "<C-d>",
-        "z",
-        "z"
-      ],
-    },
-    {
-      "before": [
-        "<C-u>"
-      ],
-      "after": [
-        "<C-u>",
-        "z",
-        "z"
-      ],
-    }
-  ],
-  "vim.visualModeKeyBindings": [],
-  "vim.insertModeKeyBindingsNonRecursive": [],
-  "vim.normalModeKeyBindingsNonRecursive": [],
-  "vim.visualModeKeyBindingsNonRecursive": [],
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1,
     "asvetliakov.vscode-neovim": 1
@@ -322,5 +253,40 @@
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "workbench.statusBar.visible": false,
+  "[mjml]": {
+    "editor.defaultFormatter": "attilabuti.vscode-mjml"
+  },
+  "mjml.autoPreview": true,
+  "editor.indentSize": "tabSize",
+  "editor.scrollBeyondLastColumn": 8,
+  "editor.smoothScrolling": true,
+  "vscode-neovim.compositeKeys": {
+    "jj": {
+      "command": "vscode-neovim.escape"
+    },
+    "jk": {
+      "command": "vscode-neovim.lua",
+      "args": [
+        [
+          "local code = require('vscode')",
+          "code.action('vscode-neovim.escape')",
+          "code.action('workbench.action.files.save')"
+        ]
+      ]
+    }
+  },
+  "editor.guides.indentation": false,
+  "editor.fontSize": 14,
+  "debug.console.fontSize": 14,
+  "workbench.editor.showTabs": "single",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.iconTheme": "quill-icons",
+  "workbench.preferredDarkColorTheme": "Base16 meu",
+  "gruvboxMaterial.italicComments": false,
+  "gruvboxMaterial.darkWorkbench": "flat",
+  "gruvboxMaterial.highContrast": true,
+  "gruvboxMaterial.lightContrast": "hard",
+  "gruvboxMaterial.darkSelection": "orange"
 }

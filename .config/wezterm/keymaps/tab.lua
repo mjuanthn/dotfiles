@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
+local k = require("utils/keys")
 
 local function isViProcess(pane)
 	return pane:get_foreground_process_name():find("n?vim") ~= nil
@@ -45,6 +46,7 @@ local keys = {
 	{ key = "j", mods = "CTRL", action = act.EmitEvent("ActivatePaneDirection-down") },
 	{ key = "k", mods = "CTRL", action = act.EmitEvent("ActivatePaneDirection-up") },
 	{ key = "l", mods = "CTRL", action = act.EmitEvent("ActivatePaneDirection-right") },
+	-- { key = "w", mods = "CMD", action = act.EmitEvent("CloseCurrentPanel") },
 }
 
 return keys

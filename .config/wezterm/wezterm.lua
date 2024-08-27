@@ -4,7 +4,7 @@ local light_opacity = 1
 local b = require("utils/background")
 local h = require("utils/helpers")
 local c = require("utils/color")
-local f = require("utils/font")
+-- local f = require("utils/font")
 local k = require("keymaps")
 local wezterm = require("wezterm")
 

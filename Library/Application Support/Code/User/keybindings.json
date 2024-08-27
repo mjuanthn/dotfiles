@@ -77,11 +77,6 @@
   // Coding
   {
     "key": "shift-k",
-    "command": "editor.action.moveLinesUpAction",
-    "when": "vim.mode != 'Insert' && editorTextFocus"
-  },
-  {
-    "key": "shift-k",
     "command": "editor.action.showHover",
     "when": "vim.mode == 'Normal' && editorTextFocus"
   },
@@ -134,10 +129,7 @@
     "command": "extension.multiCommand.execute",
     "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)",
     "args": {
-      "sequence": [
-        "workbench.view.scm",
-        "workbench.scm.focus"
-      ]
+      "sequence": ["workbench.view.scm", "workbench.scm.focus"]
     }
   },
   {
@@ -279,6 +271,18 @@
   },
   {
     "key": "ctrl+s",
-    "command": "workbench.action.files.save",
+    "command": "workbench.action.files.save"
+  },
+  {
+    "key": "cmd+[Comma]",
+    "command": "workbench.action.openSettingsJson"
+  },
+  {
+    "key": "shift+cmd+[Comma]",
+    "command": "workbench.action.openSettings"
+  },
+  {
+    "key": "cmd+[Comma]",
+    "command": "-workbench.action.openSettings"
   }
 ]

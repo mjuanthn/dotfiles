@@ -1,31 +1,17 @@
+local strongHighlight = "#c14a4a"
+
 return {
 	{
 		"catppuccin/nvim",
-		priority = 1000,
 		name = "catppuccin",
-		init = function()
-			vim.cmd.colorscheme("catppuccin")
-			vim.cmd.hi("Comment gui=none")
-		end,
+		lazy = false,
+		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
-
-				-- transparent_background = false, -- disables setting the background color.
-				-- integrations = {
-				--   which_key = true,
-				--   cmp = true,
-				--   gitsigns = true,
-				--   treesitter = true,
-				--   notify = false,
-				--   telescope = {
-				--     enabled = true,
-				--     style = "nvchad",
-				--   },
-				-- },
-				-- background = {
-				--   light = "latte",
-				--   dark = "mocha",
-				-- },
+				background = {
+					light = "latte",
+					dark = "mocha",
+				},
 				color_overrides = {
 					latte = {
 						rosewater = "#c14a4a",
@@ -101,15 +87,6 @@ return {
 					treesitter_context = true,
 					vimwiki = true,
 					which_key = true,
-					aerial = true,
-					fidget = true,
-					mason = true,
-					neotest = true,
-					dap_ui = true,
-					telescope = {
-						enabled = true,
-						style = "nvchad",
-					},
 				},
 				highlight_overrides = {
 					all = function(colors)
@@ -142,10 +119,22 @@ return {
 							NormalFloat = { bg = colors.base },
 							Pmenu = { bg = colors.mantle, fg = "" },
 							PmenuSel = { bg = colors.surface0, fg = "" },
+							TelescopePreviewBorder = { bg = colors.crust, fg = colors.crust },
+							TelescopePreviewNormal = { bg = colors.crust },
+							TelescopePreviewTitle = { fg = colors.crust, bg = colors.crust },
+							TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
+							TelescopePromptCounter = { fg = colors.mauve, style = { "bold" } },
+							TelescopePromptNormal = { bg = colors.surface0 },
+							TelescopePromptPrefix = { bg = colors.surface0 },
+							TelescopePromptTitle = { fg = colors.surface0, bg = colors.surface0 },
+							TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
+							TelescopeResultsNormal = { bg = colors.mantle },
+							TelescopeResultsTitle = { fg = colors.mantle, bg = colors.mantle },
+							TelescopeSelection = { bg = colors.surface0 },
 							VertSplit = { bg = colors.base, fg = colors.surface0 },
 							WhichKeyFloat = { bg = colors.mantle },
 							YankHighlight = { bg = colors.surface2 },
-							FidgetTask = { fg = colors.subtext1 },
+							FidgetTask = { fg = colors.subtext2 },
 							FidgetTitle = { fg = colors.peach },
 
 							IblIndent = { fg = colors.surface0 },
@@ -177,8 +166,8 @@ return {
 							SpecialChar = { fg = colors.yellow },
 							Type = { fg = colors.yellow, style = { "bold" } },
 							Function = { fg = colors.green, style = { "bold" } },
-							Delimiter = { fg = colors.subtext1 },
-							Ignore = { fg = colors.subtext1 },
+							Delimiter = { fg = colors.subtext2 },
+							Ignore = { fg = colors.subtext2 },
 							Macro = { fg = colors.teal },
 
 							TSAnnotation = { fg = colors.mauve },
@@ -228,7 +217,7 @@ return {
 							TSRepeat = { fg = colors.red },
 							TSStorageClass = { fg = colors.peach },
 							TSStorageClassLifetime = { fg = colors.peach },
-							TSStrike = { fg = colors.subtext1 },
+							TSStrike = { fg = colors.subtext2 },
 							TSString = { fg = colors.teal },
 							TSStringEscape = { fg = colors.green },
 							TSStringRegex = { fg = colors.green },
@@ -367,11 +356,103 @@ return {
 					end,
 				},
 			})
-			vim.api.nvim_set_hl(0, "NavicIconsOperator", { default = true, bg = "none", fg = "#eedaad" })
-			vim.api.nvim_set_hl(0, "NavicText", { default = true, bg = "none", fg = "#eedaad" })
-			vim.api.nvim_set_hl(0, "NavicSeparator", { default = true, bg = "none", fg = "#eedaad" })
-			--
+
 			vim.api.nvim_command("colorscheme catppuccin")
+		end,
+	},
+	{
+		"neanias/everforest-nvim",
+		version = false,
+		lazy = false,
+		priority = 1000,
+		enabled = true,
+		config = function()
+			require("everforest").setup({
+				background = "hard",
+				italis = true,
+				transparent_background_level = 1,
+				diagnostic_text_highlight = true,
+				diagnostic_virtual_text = "coloured",
+			})
+			-- vim.api.nvim_command("colorscheme everforest")
+		end,
+	},
+	{
+		"rebelot/kanagawa.nvim",
+		priority = 1000,
+		config = function()
+			-- Make background transparent. I like semi-transparent background in the terminal.
+			vim.cmd([[
+        augroup user_colors
+          autocmd!
+          autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+        augroup END
+      ]])
+
+			require("kanagawa").setup({
+				undercurl = true, -- enable undercurls
+				commentStyle = {
+					italic = true,
+				},
+				colors = {
+					theme = {
+						all = {
+							ui = {
+								bg_gutter = "none",
+							},
+						},
+					},
+				},
+				functionStyle = {},
+				keywordStyle = {
+					italic = true,
+				},
+				statementStyle = {},
+				typeStyle = {},
+				variablebuiltinStyle = {
+					italic = true,
+				},
+				overrides = function(colors)
+					local theme = colors.theme
+					return {
+						IncSearch = { fg = "black", bg = strongHighlight, underline = true, bold = true },
+						Search = { fg = "black", bg = colors.palette.oniViolet },
+						Substitute = { fg = "black", bg = colors.palette.strongHighlight },
+						Pmenu = { fg = theme.ui.shade0, bg = colors.palette.sumiInk3 },
+						PmenuSel = { fg = "NONE", bg = theme.ui.bg_p4 },
+						PmenuSbar = { bg = theme.ui.bg_p2 },
+						PmenuThumb = { bg = theme.ui.bg_p2 },
+					}
+				end,
+				specialReturn = true, -- special highlight for the return keyword
+				specialException = true, -- special highlight for exception handling keywords
+				transparent = false, -- do not set background color
+			})
+
+			-- vim.api.nvim_set_hl(0, "@tag", { fg = colors.lightBlue })
+			-- vim.api.nvim_set_hl(0, "@tag.delimiter", { fg = colors.lightBlue, })
+			-- vim.api.nvim_set_hl(0, "@tag.attribute", { fg = colors.sakuraPink })
+
+			vim.cmd.hi("NonText guifg=bg")
+			--vim.cmd("colorscheme kanagawa-dragon")
+
+			-- Highlight active line
+			vim.opt.cursorline = true
+			vim.opt.cursorlineopt = "number"
+			vim.cmd.highlight("CursorLineNr guibg=#1a1a22")
+			vim.cmd.highlight("SignColumnNr guibg=#1a1a22")
+
+			-- Modal
+			vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#35312C", bg = "NONE" })
+			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1E1E1E" })
+			-- Configurar el color del borde para ventanas flotantes del LSP
+			vim.api.nvim_set_hl(0, "LspFloatBorder", { fg = "#1C1E20", bg = "NONE" }) -- Verde
+			-- Configurar el color de fondo para ventanas flotantes del LSP
+			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1C1E20" }) -- Gris oscuro
+			-- Configurar el color del borde para el menú de nvim-cmp
+			vim.api.nvim_set_hl(0, "CmpBorder", { fg = "#1C1E20", bg = "NONE" }) -- Rosa
+			-- Configurar el color de fondo para el menú de nvim-cmp
+			vim.api.nvim_set_hl(0, "Pmenu", { bg = "#1C1E20" }) -- Gris oscuro
 		end,
 	},
 }

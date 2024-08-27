@@ -1,0 +1,10 @@
+{
+    "diagnostics.globals": [
+        "vim",
+        "prev_trouble",
+        "next_trouble"
+    ],
+    "diagnostics.disable": [
+        "undefined-global"
+    ]
+}
