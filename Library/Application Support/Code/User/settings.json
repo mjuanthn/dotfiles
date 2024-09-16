@@ -160,17 +160,17 @@
     "lists": ["explorer-folders-view", "quick-input-list", "results"],
     "height": 20
   },
-  // "apc.menubar.compact": true,
+  "apc.menubar.compact": true,
   "apc.stylesheet": {
     ".quick-input-widget.show-file-icons": "box-shadow: none !important",
     ".editor-widget.find-widget": "box-shadow: none !important",
-    ".panel .composite.title": "opacity: 0 !important; padding-top: 6px; padding-left: 4rem; border: none !important; transition: opacity 0.2s ease-in-out !important;",
+    ".panel .composite.title": "opacity: 0 !important; padding-top: 6px !important; padding-left: 4rem !important; border: none !important; transition: opacity 0.2s ease-in-out !important;",
     ".panel .composite.title:hover": "opacity: 1 !important",
     ".monaco-editor .scroll-decoration": "display: none !important",
     ".monaco-scrollable-element > .shadow.top": "display: none !important",
     ".monaco-workbench .monaco-list:not(.element-focused):focus:before": "outline: none !important",
     // editor title
-    ".title": "--editor-group-tab-height: 22px !important; height: 34px !important; background-color: #181818 !important;",
+    ".title": "--editor-group-tab-height: 22px !important; height: 34px !important; background-color: #1D2021 !important;",
     ".title .title-actions": "opacity: 0 !important; transition: opacity 0.2s ease-in-out !important",
     ".title:hover .title-actions": "opacity: 1 !important",
     ".editor-group-container > .title > .label-container": "padding-top: .4rem !important; background-color: transparent !important",
@@ -182,10 +182,10 @@
     // editor
     ".editor-container": "height: 100% !important",
     // statusbar
-    ".statusbar": "background-color: #181818 !important; --status-border-top-color: transparent !important; color: #4B4B49 !important; transition: color 0.1s ease-in-out !important",
+    ".statusbar": "background-color: #1D2021 !important; --status-border-top-color: transparent !important; color: #4B4B49 !important; transition: color 0.1s ease-in-out !important",
     ".statusbar:hover": "color: #D0C8C6 !important",
     // sidebar
-    ".sidebar": "border: none !important; background-color: #181818 !important",
+    ".sidebar": "border: none !important; background-color: #1D2021 !important",
     ".sidebar .monaco-list-rows": "background-color: transparent !important",
     ".sidebar .composite.title": "margin: 8px auto auto -4px !important; ", // sidebar title position
     ".sidebar .title-label": "padding: 0 !important",
@@ -283,11 +283,13 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "workbench.iconTheme": "quill-icons",
-  "workbench.preferredDarkColorTheme": "Base16 meu",
+  "workbench.preferredDarkColorTheme": "Gruvbox ish Dark Hard",
   "gruvboxMaterial.italicComments": false,
   "gruvboxMaterial.darkWorkbench": "flat",
   "gruvboxMaterial.highContrast": true,
   "gruvboxMaterial.lightContrast": "hard",
   "gruvboxMaterial.darkSelection": "orange",
-  "workbench.statusBar.visible": false
+  "workbench.statusBar.visible": false,
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+  "vscode-neovim.neovimExecutablePaths.linux": "/opt/homebrew/bin/nvim"
 }

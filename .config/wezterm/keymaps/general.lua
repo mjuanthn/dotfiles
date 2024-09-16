@@ -28,11 +28,20 @@ wezterm.on("FindCommand-p", function(window, pane)
 	)
 end)
 
-wezterm.on("FindCommand-f", function(window, pane)
+wezterm.on("FindCommand-shift-f", function(window, pane)
 	h.conditionalExecuteAction(
 		window,
 		pane,
 		k.multiple_actions(":Telescope live_grep"),
+		k.multiple_actions(":Telescope live_grep")
+	)
+end)
+
+wezterm.on("FindCommand-f", function(window, pane)
+	h.conditionalExecuteAction(
+		window,
+		pane,
+		k.multiple_actions(":Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case"),
 		k.multiple_actions(":Telescope live_grep")
 	)
 end)
@@ -74,15 +83,22 @@ wezterm.on("EditorSaveAllAndQuit", function(window, pane)
 		pane,
 		act.Multiple({
 			act.SendKey({ key = "\x1b" }),
-			k.multiple_actions(":wqa"),
+			k.multiple_actions(":qa"),
 		}),
 		nil
 	)
 end)
 
 return {
-	{ key = "\x1b", mods = "CMD", action = act.ActivateCommandPalette },
-	{ key = "n", mods = "CMD", action = act.SpawnWindow },
+	{ key = "0", mods = "CMD", action = act.ActivateCommandPalette },
+	-- {
+	-- 	key = "\x1b",
+	-- 	mods = "CMD",
+	-- 	action = act.Multiple({
+	-- 		act.SendKey({ key = "\x1b" }),
+	-- 		k.multiple_actions(":bufdo bd"),
+	-- 	}),
+	-- },
 	{
 		key = "l",
 		mods = "CMD",
@@ -95,6 +111,7 @@ return {
 	-- VIM commands
 	{ key = "p", mods = "CMD", action = wezterm.action.EmitEvent("FindCommand-p") },
 	{ key = "f", mods = "CMD", action = wezterm.action.EmitEvent("FindCommand-f") },
+	{ key = "F", mods = "CMD", action = wezterm.action.EmitEvent("FindCommand-shift-f") },
 	{ key = "s", mods = "CMD", action = wezterm.action.EmitEvent("EditorSaveAll") },
 	{ key = "q", mods = "CMD", action = wezterm.action.EmitEvent("EditorSaveAllAndQuit") },
 	{ key = "e", mods = "CMD", action = wezterm.action.EmitEvent("ShowFileTree") },

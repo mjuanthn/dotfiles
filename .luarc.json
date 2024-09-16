@@ -1,9 +1,0 @@
-{
-    "diagnostics.disable": [
-        "undefined-global"
-    ],
-    "diagnostics.globals": [
-        "next_trouble",
-        "prev_trouble"
-    ]
-}

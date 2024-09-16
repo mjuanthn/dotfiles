@@ -18,10 +18,11 @@ alias python='/usr/bin/python3'
 
 # NVim configs
 alias vue='NVIM_APPNAME=nvim-vue nvim'
+alias meu='NVIM_APPNAME=nvim-meu nvim'
 alias nv='NVIM_APPNAME=nvim-lazy nvim'
 # alias nv='nvim'
-alias n='nv'
-alias m='nv'
+alias n='meu'
+alias m='meu'
 
 # Utils
 alias mkdir='mkdir -p'
