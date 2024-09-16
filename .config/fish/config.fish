@@ -17,17 +17,16 @@ starship init fish | source
 alias python='/usr/bin/python3'
 
 # NVim configs
-alias nv='NVIM_APPNAME=nvim-min nvim'
+alias vue='NVIM_APPNAME=nvim-vue nvim'
+alias nv='NVIM_APPNAME=nvim-lazy nvim'
 # alias nv='nvim'
 alias n='nv'
 alias m='nv'
 
-# NVim next
-
 # Utils
+alias mkdir='mkdir -p'
 alias cls='clear'
-alias cl='clear'
-alias c='clear'
+alias o='clear'
 
 alias ls='eza -a --icons -l'
 alias ll='ls'
@@ -47,9 +46,9 @@ set --export PATH $BUN_INSTALL/bin $PATH
 abbr tn "tmux new -s (pwd | sed 's/.*\///g')"
 
 # pnpm
-set -gx PNPM_HOME "/Users/mjuan/Library/pnpm"
+set -gx PNPM_HOME /Users/mjuan/Library/pnpm
 if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
 
@@ -152,10 +151,7 @@ alias z=__zoxide_z
 abbr --erase zi &>/dev/null
 alias zi=__zoxide_zi
 
-alias cd=z
-alias c=z
-alias cdi=zi
-alias ci=zi
+alias c=zi
 
 # =============================================================================
 #

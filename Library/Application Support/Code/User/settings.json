@@ -9,7 +9,7 @@
   "window.autoDetectColorScheme": true,
   "editor.codeLensFontSize": 12,
   "editor.lineHeight": 1.75,
-  "editor.suggestFontSize": 14,
+  "editor.suggestFontSize": 13,
   "editor.suggestLineHeight": 28,
   "terminal.integrated.fontSize": 14,
   // More minimal UI
@@ -276,7 +276,7 @@
     }
   },
   "editor.guides.indentation": false,
-  "editor.fontSize": 14,
+  "editor.fontSize": 13,
   "debug.console.fontSize": 14,
   "workbench.editor.showTabs": "single",
   "[jsonc]": {
@@ -288,5 +288,6 @@
   "gruvboxMaterial.darkWorkbench": "flat",
   "gruvboxMaterial.highContrast": true,
   "gruvboxMaterial.lightContrast": "hard",
-  "gruvboxMaterial.darkSelection": "orange"
+  "gruvboxMaterial.darkSelection": "orange",
+  "workbench.statusBar.visible": false
 }

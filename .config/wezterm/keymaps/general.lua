@@ -37,6 +37,21 @@ wezterm.on("FindCommand-f", function(window, pane)
 	)
 end)
 
+-- ShowFileTree
+wezterm.on("ShowFileTree", function(window, pane)
+	h.conditionalExecuteAction(
+		window,
+		pane,
+		act.Multiple({
+			act.SendKey({ key = "\x1b" }),
+			act.SendKey({ key = "\x1b" }),
+			act.SendKey({ key = "\x1b" }),
+			k.multiple_actions(":Neotree float reveal toggle"),
+		}),
+		nil
+	)
+end)
+
 -- Save all changes
 wezterm.on("EditorSaveAll", function(window, pane)
 	h.conditionalExecuteAction(
@@ -44,10 +59,9 @@ wezterm.on("EditorSaveAll", function(window, pane)
 		pane,
 		act.Multiple({
 			act.SendKey({ key = "\x1b" }),
+			act.SendKey({ key = "\x1b" }),
+			act.SendKey({ key = "\x1b" }),
 			k.multiple_actions(":wa"),
-			act.SendKey({ key = "\x1b" }),
-			act.SendKey({ key = "\x1b" }),
-			act.SendKey({ key = "\x1b" }),
 		}),
 		nil
 	)
@@ -67,14 +81,23 @@ wezterm.on("EditorSaveAllAndQuit", function(window, pane)
 end)
 
 return {
-	{ key = "\x1b", mods = "CMD", action = wezterm.action.ActivateCommandPalette },
+	{ key = "\x1b", mods = "CMD", action = act.ActivateCommandPalette },
 	{ key = "n", mods = "CMD", action = act.SpawnWindow },
+	{
+		key = "l",
+		mods = "CMD",
+		action = act.Multiple({
+			act.ClearScrollback("ScrollbackAndViewport"),
+			act.SendKey({ key = "L", mods = "CTRL" }),
+		}),
+	},
 
 	-- VIM commands
 	{ key = "p", mods = "CMD", action = wezterm.action.EmitEvent("FindCommand-p") },
 	{ key = "f", mods = "CMD", action = wezterm.action.EmitEvent("FindCommand-f") },
 	{ key = "s", mods = "CMD", action = wezterm.action.EmitEvent("EditorSaveAll") },
 	{ key = "q", mods = "CMD", action = wezterm.action.EmitEvent("EditorSaveAllAndQuit") },
+	{ key = "e", mods = "CMD", action = wezterm.action.EmitEvent("ShowFileTree") },
 	{
 		key = "W",
 		mods = "CMD|SHIFT",

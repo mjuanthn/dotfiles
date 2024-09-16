@@ -1,0 +1,162 @@
+start-at-login = true
+
+# [mode.main.binding]
+# alt-enter = 'exec-and-forget /Applications/Alacritty.app/Contents/MacOS/alacritty -e /Users/bobko/.bin/pw'
+
+# Start AeroSpace at login
+# start-at-login = true
+
+# Reference: https://github.com/FelixKratz/JankyBorders
+# after-startup-command = ['''exec-and-forget \
+#     /opt/homebrew/bin/borders \
+#       active_color=0xffe1e3e4 \
+#       inactive_color=0xff494d64 \
+#       width=5.0
+#     ''']
+
+# after-startup-command = ['exec-and-forget sketchybar']
+# exec-on-workspace-change = [
+#   '/bin/bash',
+#   '-c',
+#   'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+# ]
+
+# See: https://nikitabobko.github.io/AeroSpace/guide.html#layouts
+# The 'accordion-padding' specifies the size of accordion padding
+# You can set 0 to disable the padding feature
+accordion-padding = 30
+
+non-empty-workspaces-root-containers-layout-on-startup = 'smart'
+
+# Possible values: tiles|accordion
+default-root-container-layout = 'tiles'
+
+# Possible values: horizontal|vertical|auto
+# 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
+#               tall monitor (anything higher than wide) gets vertical orientation
+default-root-container-orientation = 'auto'
+
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide.html#normalization
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# Gaps between windows (inner-*) and between monitor edges (outer-*).
+# Possible values:
+# - Constant:     gaps.outer.top = 8
+# - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
+#                 In this example, 24 is a default value when there is no match.
+#                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
+#                 See: https://nikitabobko.github.io/AeroSpace/guide.html#assign-workspaces-to-monitors
+gaps.inner.horizontal = 15
+gaps.inner.vertical = 15
+gaps.outer.bottom = 15
+gaps.outer.left = 15
+gaps.outer.right = 15
+gaps.outer.top = 38
+
+[mode.main.binding]
+alt-enter = 'exec-and-forget open -n /Applications/WezTerm.app'
+
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# ctrl-alt-h = 'split horizontal'
+# ctrl-alt-v = 'split vertical'
+
+alt-f = 'fullscreen'
+
+alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+alt-s = 'layout v_accordion' # 'layout stacking' in i3
+alt-w = 'layout h_accordion' # 'layout tabbed' in i3
+
+alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
+
+# Not supported, because this command is redundant in AeroSpace mental model.
+# See: https://nikitabobko.github.io/AeroSpace/guide.html#floating-windows
+#alt-space = 'focus toggle_tiling_floating'
+
+# `focus parent`/`focus child` are not yet supported, and it's not clear whether they
+# should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
+# alt-a = 'focus parent'
+ctrl-0 = 'workspace 10'
+ctrl-1 = 'workspace 1'
+ctrl-2 = 'workspace 2'
+ctrl-3 = 'workspace 3'
+ctrl-4 = 'workspace 4'
+ctrl-5 = 'workspace 5'
+ctrl-6 = 'workspace 6'
+ctrl-7 = 'workspace 7'
+ctrl-8 = 'workspace 8'
+ctrl-9 = 'workspace 9'
+
+alt-shift-0 = 'move-node-to-workspace 10'
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+
+alt-shift-c = 'reload-config'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands.html#workspace-back-and-forth
+alt-tab = 'workspace-back-and-forth'
+# See: https://nikitabobko.github.io/AeroSpace/commands.html#move-workspace-to-monitor
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+alt-r = 'mode resize'
+
+[mode.resize.binding]
+enter = 'mode main'
+esc = 'mode main'
+j = 'resize smart +200'
+k = 'resize smart -200'
+
+# workspace 1 - Wezterm
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace 1'
+
+# workspace 2 - Arc Browser (main)
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'
+run = 'move-node-to-workspace 8'
+
+# workspace 3 - Rambox
+# [[on-window-detected]]
+# if.app-id = 'com.rambox'
+# run = 'move-node-to-workspace 3'
+
+# workspace 4 - Obsidian
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace 10'
+
+# workspace 5 - Arc Browser (secondary window)
+#
+
+# workspace 6 - Spotify
+# [[on-window-detected]]
+# if.app-id = 'com.spotify.client'
+# run = 'move-node-to-workspace 6'
+
+[workspace-to-monitor-force-assignment]
+1 = 1
+10 = 2
+2 = 1
+3 = 1
+4 = 1
+5 = 1
+6 = 1
+8 = 2
+9 = 2
