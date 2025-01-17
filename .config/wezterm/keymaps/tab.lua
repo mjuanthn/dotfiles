@@ -47,6 +47,23 @@ local keys = {
 	{ key = "k", mods = "CTRL", action = act.EmitEvent("ActivatePaneDirection-up") },
 	{ key = "l", mods = "CTRL", action = act.EmitEvent("ActivatePaneDirection-right") },
 	-- { key = "w", mods = "CMD", action = act.EmitEvent("CloseCurrentPanel") },
+	{
+		key = "Tab",
+		mods = "CTRL",
+		action = act.Multiple({
+			act.SendKey({ key = "\x1b" }),
+			act.SendKey({ key = "\x1b" }),
+			k.multiple_actions(':lua require("buffer_manager.ui").toggle_quick_menu()'),
+		}),
+	},
+	-- {
+	-- 	key = "Tab",
+	-- 	mods = "SHIFT|CTRL",
+	-- 	action = act.Multiple({
+	-- 		act.SendKey({ key = "\x1b" }),
+	-- 		k.multiple_actions(":bufdo bd"),
+	-- 	}),
+	-- },
 }
 
 return keys

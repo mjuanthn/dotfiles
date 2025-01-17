@@ -17,12 +17,9 @@ starship init fish | source
 alias python='/usr/bin/python3'
 
 # NVim configs
-alias vue='NVIM_APPNAME=nvim-vue nvim'
-alias meu='NVIM_APPNAME=nvim-meu nvim'
-alias nv='NVIM_APPNAME=nvim-lazy nvim'
-# alias nv='nvim'
-alias n='meu'
-alias m='meu'
+alias nvim_default='NVIM_APPNAME=nvim-next nvim'
+alias k='NVIM_APPNAME=nvim-kickstart nvim'
+alias n='nvim_default'
 
 # Utils
 alias mkdir='mkdir -p'
@@ -160,3 +157,7 @@ alias c=zi
 # ~/.config/fish/config.fish):
 #
 #   zoxide init fish | source
+fish_add_path /Users/mjuan/.modular/bin
+
+# Added by Windsurf
+fish_add_path /Users/mjuan/.codeium/windsurf/bin

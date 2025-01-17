@@ -11,7 +11,7 @@ wezterm.on("CloseCurrentPanel", function(window, pane)
 	h.conditionalExecuteAction(
 		window,
 		pane,
-		k.multiple_actions(":bd"),
+		k.multiple_actions("Q"),
 		wezterm.action.CloseCurrentPane({ confirm = false })
 	)
 end)
@@ -132,6 +132,13 @@ return {
 			act.SendKey({ key = "\x1b" }),
 			act.SendKey({ key = "\x1b" }),
 			act.SendKey({ key = "\x1b" }),
+		}),
+	},
+	{
+		key = "k",
+		mods = "CMD",
+		action = act.ShowLauncherArgs({
+			flags = "FUZZY|WORKSPACES",
 		}),
 	},
 }
