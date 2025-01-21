@@ -57,7 +57,7 @@ vim.g.netrw_mouse = 2
 vim.g.netrw_liststyle = 3
 
 -- Diagnostic
-local icons = require("config.ui.icons")
+local icons = require("config.icons")
 local signs = { Error = icons.ui.Dot, Warn = icons.ui.Dot, Hint = icons.ui.Dot, Info = icons.ui.Dot }
 vim.diagnostic.config({
   virtual_text = false, -- This disables inline text
