@@ -1,0 +1,70 @@
+bold-is-bright = false
+macos-titlebar-style = hidden
+macos-window-shadow = false
+mouse-hide-while-typing = true
+window-decoration = false
+window-padding-balance = true
+window-padding-x = 2
+window-padding-y = 4
+window-save-state = always
+window-theme = auto
+# maximise by default
+window-width = 9999
+window-height = 9999
+
+background=1D2021
+foreground=ECDAB0
+
+# font
+font-family="Berkeley Mono"
+font-size = 16
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+adjust-underline-position = 2
+adjust-cell-height = 3
+
+# visuals
+term = xterm-256color
+macos-window-shadow = false
+mouse-hide-while-typing = true
+theme = "Kanagawa Dragon"
+window-decoration = false
+
+clipboard-read = "allow"
+clipboard-trim-trailing-spaces = true
+clipboard-write = "allow"
+
+#################
+## keybindings ##
+#################
+# Some useful encoded characters:
+# \x0a = Enter/Return
+# \x1b = Esc
+# \x02 = <C-b> (tmux prefix)
+
+keybind = global:cmd+escape=toggle_quick_terminal
+keybind = global:alt+enter=toggle_fullscreen
+
+# native splits
+# keybind = global:ctrl+h=goto_split:left
+# keybind = global:ctrl+l=goto_split:right
+# keybind = global:ctrl+j=goto_split:bottom
+# keybind = global:ctrl+k=goto_split:top
+#
+# keybind = global:ctrl+shift+h=resize_split:left,20
+# keybind = global:ctrl+shift+l=resize_split:right,20
+# keybind = global:ctrl+shift+j=resize_split:down,20
+# keybind = global:ctrl+shift+k=resize_split:up,20
+
+# nvim cmds
+keybind = cmd+s=text:\x1b\x1b:w\x0a
+keybind = cmd+q=text:\x1b\x1b:q!\x0a
+keybind = cmd+w=text:\x1b\x1b:bdelete\x0a
+keybind = cmd+p=text:\x1b\x1b\x20\x20
+keybind = cmd+shift+f=text:\x1b\x1b\x20sg
+keybind = cmd+f=text:\x1b\x1b\x2f
+
+keybind = ctrl+j=text:\x0e # ctrl+n
+keybind = ctrl+k=text:\x10 # ctrl+p
+
