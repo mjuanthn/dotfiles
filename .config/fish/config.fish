@@ -161,3 +161,5 @@ fish_add_path /Users/mjuan/.modular/bin
 
 # Added by Windsurf
 fish_add_path /Users/mjuan/.codeium/windsurf/bin
+
+set -gx PATH "~/.tmuxifier/bin" $PATH
