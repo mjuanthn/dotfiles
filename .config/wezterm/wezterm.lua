@@ -4,17 +4,27 @@ local light_opacity = 1
 local b = require("utils/background")
 local h = require("utils/helpers")
 local c = require("utils/color")
--- local f = require("utils/font")
+local l = require("utils/lume")
 local k = require("keymaps")
+
 local wezterm = require("wezterm")
+local mux = wezterm.mux
+local is_windows = wezterm.target_triple == "x86_64-pc-windows-msvc"
 
 local keybind = require("keybinds")
 
+local function basename(s)
+	return string.gsub(s, "(.*[/\\])(.*)", "%2")
+end
+
 local config = {
+	front_end = "WebGpu",
+	webgpu_power_preference = "HighPerformance",
+
 	background = {
 		b.get_background(dark_opacity, light_opacity),
 	},
-	font_size = 16,
+	font_size = 18,
 	line_height = 1.1,
 	font = wezterm.font_with_fallback({
 		"Berkeley Mono",
@@ -31,7 +41,6 @@ local config = {
 	},
 
 	set_environment_variables = {
-		BAT_THEME = h.is_dark() and "Catppuccin-mocha" or "Catppuccin-latte",
 		TERM = "xterm-256color",
 		LC_ALL = "en_US.UTF-8",
 	},
@@ -42,21 +51,44 @@ local config = {
 	debug_key_events = false,
 	use_fancy_tab_bar = false,
 	native_macos_fullscreen_mode = false,
-	window_close_confirmation = "NeverPrompt",
+	-- window_close_confirmation = "NeverPrompt",
 	window_decorations = "RESIZE",
 	show_new_tab_button_in_tab_bar = false,
 	tab_max_width = 900,
+	adjust_window_size_when_changing_font_size = false,
+        max_fps = 120,
+
 	-- Keymaps
 	disable_default_key_bindings = true,
 	keys = keybind.keys,
 	key_tables = keybind.key_tables,
-	leader = { key = ",", mods = "CTRL", timeout_milliseconds = 2000 },
+	leader = { key = "s", mods = "CMD|CTRL", timeout_milliseconds = 1000 },
 }
+
+if is_windows then
+	config.wsl_domains = {
+		{
+			name = "WSL:Ubuntu",
+			distribution = "WSL",
+			default_cwd = "/home/mjjuan",
+		},
+	}
+	config.default_domain = "WSL:NixOS"
+else
+	config.unix_domains = {
+		{
+			name = "unix",
+		},
+	}
+	config.default_gui_startup_args = { "connect", "unix" }
+	config.default_domain = "unix"
+	config.default_mux_server_domain = "unix"
+end
 
 -- plugins
 local t = require("plugins.tabbar")
 local s = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
-
+--
 -- apply config
 k.apply_to_config(config) -- keymaps
 c.apply_to_config(config) -- colors
@@ -69,27 +101,24 @@ s.apply_to_config(config, {
 	},
 })
 
-wezterm.on("user-var-changed", function(window, pane, name, value)
-	local overrides = window:get_config_overrides() or {}
-	if name == "ZEN_MODE" then
-		local incremental = value:find("+")
-		local number_value = tonumber(value)
-		if incremental ~= nil then
-			while number_value > 0 do
-				window:perform_action(wezterm.action.IncreaseFontSize, pane)
-				number_value = number_value - 1
-			end
-			overrides.enable_tab_bar = false
-		elseif number_value < 0 then
-			window:perform_action(wezterm.action.ResetFontSize, pane)
-			overrides.font_size = nil
-			overrides.enable_tab_bar = true
-		else
-			overrides.font_size = number_value
-			overrides.enable_tab_bar = false
-		end
+local function is_default_startup(cmd)
+	if not cmd then
+		return true
 	end
-	window:set_config_overrides(overrides)
+	if cmd.domain == "DefaultDomain" and not cmd.args then
+		return true
+	end
+	return false
+end
+
+wezterm.on("gui-startup", function(cmd)
+	if is_default_startup(cmd) then
+		-- for the default startup case, we want to switch to the unix domain instead
+		local unix = mux.get_domain("unix")
+		mux.set_default_domain(unix)
+		-- ensure that it is attached
+		unix:attach()
+	end
 end)
 
 return config

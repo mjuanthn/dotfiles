@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+sesh connect "$(
+  sesh list --icons --hide-duplicates | fzf --no-border \
+    --ansi \
+    --list-border \
+    --no-sort --prompt '⚡  ' \
+    --color 'list-border:6,input-border:3,preview-border:4,header-bg:-1,header-border:6' \

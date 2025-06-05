@@ -1,5 +1,5 @@
 yabai -m config                                 \
-    external_bar                 all:0:0        \
+    external_bar                 all:36:0        \
     menubar_opacity              1.0            \
     mouse_follows_focus          off            \
     focus_follows_mouse          off            \
@@ -18,10 +18,10 @@ yabai -m config                                 \
     split_ratio                  0.50           \
     split_type                   auto           \
     auto_balance                 off            \
-    top_padding                  12             \
-    bottom_padding               12             \
-    left_padding                 12             \
-    right_padding                12             \
+    top_padding                  06             \
+    bottom_padding               06             \
+    left_padding                 06             \
+    right_padding                06             \
     window_gap                   06             \
     layout                       bsp            \
     mouse_modifier               fn             \
@@ -29,7 +29,13 @@ yabai -m config                                 \
     mouse_action2                resize         \
     mouse_drop_action            swap
 
-echo "yabai configuration loaded.."
+# spaces alias
+yabai -m space 6 --label messaging
+
+# fixed app desktop start 
+yabai -m rule --add app="^Chromium$" display=^2
+yabai -m rule --add app="^Ghostty$" display=^1
+yabai -m rule --add label="Slack" app="^Slack$" space=messaging
 
 # disabled apps
 yabai -m rule --add app="^Settings$" manage=off
@@ -41,3 +47,4 @@ yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^FontBook$" manage=off
 yabai -m rule --add app="^Bluetooth$" manage=off
 
+echo "yabai configuration loaded.."

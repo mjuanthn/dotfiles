@@ -30,23 +30,13 @@ wezterm.on("ResizePaneDirection-down", function(window, pane)
 	h.conditionalResizePane(window, pane, "Down", "J")
 end)
 
-wezterm.on("KillEditorPanel", function(window, pane)
-	h.conditionalExecuteAction(
-		window,
-		pane,
-		k.multiple_actions(":q!"),
-		wezterm.action.CloseCurrentPane({ confirm = false })
-	)
-end)
-
 wezterm.on("CloseCurrentPanel", function(window, pane)
 	h.conditionalExecuteAction(
 		window,
 		pane,
-		--k.multiple_actions(":bd"),
 		act.Multiple({
-			-- act.SendKey({ key = "\x1b" }), -- escape
-			-- k.multiple_actions(":bd"),
+			act.SendKey({ key = "\x1b" }), -- escape
+			k.multiple_actions(":bd"),
 		}),
 		wezterm.action.CloseCurrentPane({ confirm = true })
 	)
@@ -68,13 +58,6 @@ return {
 
 	-- Close
 	{ key = "w", mods = "CMD", action = wezterm.action.EmitEvent("CloseCurrentPanel") },
-	-- k.cmd_key(
-	-- 	"w",
-	-- 	act.Multiple({
-	-- 		act.SendKey({ key = "\x1b" }), -- escape
-	-- 		k.multiple_actions(":bd"),
-	-- 	})
-	-- ),
 
 	-- Split
 	{

@@ -8,29 +8,41 @@ set -x PATH /Users/mjuan/.volta/bin:/opt/homebrew/bin:/Users/mjuan/.local/bin:/U
 set -x GOPATH ~/go
 set -x PATH $PATH /usr/local/go/bin $GOPATH/bin
 
+# Android
+set -x ANDROID_HOME ~/Library/Android/sdk
+
 # emacs
 set -x PATH $PATH ~/.config/emacs/bin
 
 starship init fish | source
 
+fish_add_path $HOME/.config/bin
+
 # python
 alias python='/usr/bin/python3'
 
 # NVim configs
-alias nvim_default='NVIM_APPNAME=nvim-next nvim'
-alias k='NVIM_APPNAME=nvim-kickstart nvim'
-alias n='nvim_default'
+alias nvim_default='NVIM_APPNAME=nvim-kickstart nvim'
+alias nvim_posva='NVIM_APPNAME=nvim-posva nvim'
+alias nvim_kickstart='NVIM_APPNAME=nvim-kickstart nvim'
+alias nvim_gentel='NVIM_APPNAME=nvim-gentel nvim'
+alias nvim_michael='NVIM_APPNAME=nvim-michael nvim'
+alias nvim_minimal='NVIM_APPNAME=minimal-nvim nvim'
+alias n='nvim_minimal'
+alias g='nvim_gentel'
+alias k='nvim_kickstart'
 
 # Utils
 alias mkdir='mkdir -p'
 alias cls='clear'
+alias cl='clear'
 alias o='clear'
 
 alias ls='eza -a --icons -l'
 alias ll='ls'
 alias l='ls'
 
-alias cat='bat'
+# alias cat='bat'
 
 abbr tn "tmux new -s (pwd | sed 's/.*\///g')"
 
@@ -44,9 +56,9 @@ set --export PATH $BUN_INSTALL/bin $PATH
 abbr tn "tmux new -s (pwd | sed 's/.*\///g')"
 
 # pnpm
-set -gx PNPM_HOME /Users/mjuan/Library/pnpm
+set -gx PNPM_HOME "/Users/mjuan/Library/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
-    set -gx PATH "$PNPM_HOME" $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
 
@@ -159,7 +171,8 @@ alias c=zi
 #   zoxide init fish | source
 fish_add_path /Users/mjuan/.modular/bin
 
-# Added by Windsurf
-fish_add_path /Users/mjuan/.codeium/windsurf/bin
-
 set -gx PATH "~/.tmuxifier/bin" $PATH
+
+nvm use --lts
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH

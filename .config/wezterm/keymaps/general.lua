@@ -3,19 +3,6 @@ local act = wezterm.action
 local k = require("utils/keys")
 local h = require("utils/helpers")
 
-wezterm.on("KillEditorPanel", function(window, pane)
-	h.conditionalExecuteAction(window, pane, k.multiple_actions(":q!"), wezterm.action.QuitApplication)
-end)
-
-wezterm.on("CloseCurrentPanel", function(window, pane)
-	h.conditionalExecuteAction(
-		window,
-		pane,
-		k.multiple_actions("Q"),
-		wezterm.action.CloseCurrentPane({ confirm = false })
-	)
-end)
-
 wezterm.on("FindCommand-p", function(window, pane)
 	--wezterm.log_warn(window, pane)
 	h.conditionalExecuteAction(
@@ -91,14 +78,6 @@ end)
 
 return {
 	{ key = "0", mods = "CMD", action = act.ActivateCommandPalette },
-	-- {
-	-- 	key = "\x1b",
-	-- 	mods = "CMD",
-	-- 	action = act.Multiple({
-	-- 		act.SendKey({ key = "\x1b" }),
-	-- 		k.multiple_actions(":bufdo bd"),
-	-- 	}),
-	-- },
 	{
 		key = "l",
 		mods = "CMD",

@@ -25,17 +25,18 @@ map({ "Q", "q" })
 -- delete is not cut
 -- https://stackoverflow.com/questions/11993851/how-to-delete-not-cut-in-vim/30423919#30423919
 -- Delete, d
-map({ "d", '"_d', mode = { "n", "x" } })
-map({ "D", '"_D', mode = { "n", "x" } })
-map({ "x", '"_x', mode = { "n", "x" } })
-map({ "X", '"_X', mode = { "n", "x" } })
+-- map({ "d", '"_d', mode = { "n", "x" } })
+-- map({ "D", '"_D', mode = { "n", "x" } })
+-- map({ "x", '"_x', mode = { "n", "x" } })
+-- map({ "X", '"_X', mode = { "n", "x" } })
+
 -- Cut, x
-map({ "x", "d", mode = { "n", "x" } })
-map({ "xx", "dd" })
-map({ "X", "D", mode = { "n", "x" } })
+-- map({ "x", "d", mode = { "n", "x" } })
+-- map({ "xx", "dd" })
+-- map({ "X", "D", mode = { "n", "x" } })
 
 -- Delete a word backwards
-map({ "db", 'vb"_d', desc = "Delete a word backwards" })
+-- map({ "db", 'vb"_d', desc = "Delete a word backwards" })
 
 -- Visual paste, don't yank
 -- changed to `x(visual)` only, see https://github.com/L3MON4D3/LuaSnip/issues/748#issuecomment-1407325131

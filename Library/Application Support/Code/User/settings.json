@@ -142,7 +142,7 @@
   "editor.formatOnPaste": true,
   "terminal.integrated.customGlyphs": true,
   "apc.electron": {
-    "titleBarStyle": "hiddenInset"
+    "titleBarStyle": "hidden"
   },
   "apc.header": {
     "height": 20
@@ -169,13 +169,13 @@
     ".monaco-scrollable-element > .shadow.top": "display: none !important",
     ".monaco-workbench .monaco-list:not(.element-focused):focus:before": "outline: none !important",
     // editor title
-    ".title": "--editor-group-tab-height: 22px !important; height: 34px !important;", //background-color: #1D2021 !important;",
+    ".title": "--editor-group-tab-height: 22px !important; height: 34px !important; background-color: #1D2021 !important;",
     ".title .title-actions": "opacity: 0 !important; transition: opacity 0.2s ease-in-out !important",
     ".title:hover .title-actions": "opacity: 1 !important",
     ".editor-group-container > .title > .label-container": "padding-top: .4rem !important; background-color: transparent !important",
     ".editor-group-container > .title > .label-container > .title-label": "padding-left: 6px !important",
     ".editor-group-container > .title > .title-actions": "height: 34px !important; background-color: transparent !important",
-    ".editor-group-container > .title .label-name": "background-color: #2C2C2B; border-radius: .38rem; padding: .2rem .4rem; font-size: 12px !important;",
+    ".editor-group-container > .title .label-name": "background-color: #1D2021; border-radius: .38rem; padding: .2rem .4rem; font-size: 12px !important;",
     ".editor-group-container > .title .label-description": "font-size: 10px !important",
     ".editor-group-container > .title .label-description:before": "content: '  ' !important; font-family: 'JetBrainsMono Nerd Font' !important; font-size: 10px !important;",
     // editor
@@ -187,7 +187,7 @@
     ".sidebar": "border: none !important; background-color: #1D2021 !important",
     ".sidebar .monaco-list-rows": "background-color: transparent !important",
     ".sidebar .composite.title": "margin: 8px auto auto -4px !important; ", // sidebar title position
-    ".sidebar .title-label": "padding: 0 !important",
+    ".sidebar .title-label": "padding: .5rem 0 0 0 !important",
     ".sidebar .pane-header": "background-color: transparent !important; border-top: none !important; font-size: 10px !important",
     ".sidebar .pane-header .title": "font-size: 10px !important; margin-top: .8rem !important;",
     // extras
@@ -243,7 +243,6 @@
     "mainThreadWebview-markdown.preview": true
   },
   "workbench.colorTheme": "Gruvbox ish Dark Hard",
-  "window.titleBarStyle": "native",
   "[vue]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
@@ -281,9 +280,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "workbench.iconTheme": "quill-icons",
-  "workbench.preferredDarkColorTheme": "Vitesse Dark",
-  "workbench.activityBar.location": "hidden",
-  "workbench.sideBar.location": "right",
   "workbench.tree.enableStickyScroll": false,
   "editor.stickyScroll.scrollWithEditor": false,
   "rainbow_csv.enable_sticky_header": false,
@@ -300,5 +296,10 @@
     "launchpad": true
   },
   "git.confirmSync": false,
-  "vim.useSystemClipboard": true
+  "vim.useSystemClipboard": true,
+  "workbench.preferredDarkColorTheme": "Gruvbox ish Dark Hard",
+  "todohighlight.isEnable": true,
+  "enableTelemetry": false,
+  "workbench.sideBar.location": "right",
+  "workbench.activityBar.location": "hidden"
 }

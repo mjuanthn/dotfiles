@@ -1,11 +1,14 @@
+command = "/opt/homebrew/bin/fish --login"
+initial-command = "/opt/homebrew/bin/fish --login -c 'sesh_start'"
+shell-integration = fish
+shell-integration-features = "no-cursor,sudo,title"
+
 bold-is-bright = false
-macos-titlebar-style = hidden
 macos-window-shadow = false
 mouse-hide-while-typing = true
-window-decoration = false
 window-padding-balance = true
 window-padding-x = 2
-window-padding-y = 4
+window-padding-y = 2
 window-save-state = always
 window-theme = auto
 # maximise by default
@@ -25,11 +28,9 @@ adjust-underline-position = 2
 adjust-cell-height = 3
 
 # visuals
-term = xterm-256color
-macos-window-shadow = false
-mouse-hide-while-typing = true
 theme = "Kanagawa Dragon"
 window-decoration = false
+macos-titlebar-style = hidden
 
 clipboard-read = "allow"
 clipboard-trim-trailing-spaces = true
@@ -42,29 +43,46 @@ clipboard-write = "allow"
 # \x0a = Enter/Return
 # \x1b = Esc
 # \x02 = <C-b> (tmux prefix)
+# \x01 = <C-a> (tmux prefix)
 
-keybind = global:cmd+escape=toggle_quick_terminal
-keybind = global:alt+enter=toggle_fullscreen
+macos-option-as-alt = left
 
-# native splits
-# keybind = global:ctrl+h=goto_split:left
-# keybind = global:ctrl+l=goto_split:right
-# keybind = global:ctrl+j=goto_split:bottom
-# keybind = global:ctrl+k=goto_split:top
-#
-# keybind = global:ctrl+shift+h=resize_split:left,20
-# keybind = global:ctrl+shift+l=resize_split:right,20
-# keybind = global:ctrl+shift+j=resize_split:down,20
-# keybind = global:ctrl+shift+k=resize_split:up,20
+# keybind = global:cmd+escape=toggle_quick_terminal
+# keybind = global:alt+enter=toggle_fullscreen
 
-# nvim cmds
+# TMUX
+
+# switch to window by index (1-based)
+keybind = super+physical:one=text:\x021
+keybind = super+physical:two=text:\x022
+keybind = super+physical:three=text:\x023
+keybind = super+physical:four=text:\x024
+keybind = super+physical:five=text:\x025
+keybind = super+physical:six=text:\x026
+keybind = super+physical:seven=text:\x027
+keybind = super+physical:eight=text:\x028
+keybind = super+physical:nine=text:\x029
+
+# new tab
+keybind = super+t=text:\x02\x63
+keybind = ctrl+tab=text:\x02\x62
+
+# splits
+keybind = super+ctrl+l=text:\x02\x7c
+keybind = super+ctrl+j=text:\x02\x2d
+keybind = super+ctrl+m=text:\x02\x7a
+
+# close window
+keybind = super+q=text:\x02\x78
+
+
+# NVIM cmds
 keybind = cmd+s=text:\x1b\x1b:w\x0a
-keybind = cmd+q=text:\x1b\x1b:q!\x0a
-keybind = cmd+w=text:\x1b\x1b:bdelete\x0a
-keybind = cmd+p=text:\x1b\x1b\x20\x20
+# keybind = cmd+q=text:\x1b\x1b:q!\x0a
+keybind = cmd+p=text:\x1b\x1b\x20sf
 keybind = cmd+shift+f=text:\x1b\x1b\x20sg
-keybind = cmd+f=text:\x1b\x1b\x2f
+keybind = cmd+f=text:\x1b\x1b\x20sw
+keybind = cmd+w=text:\x1b\x1b:bdelete\x0a
 
-keybind = ctrl+j=text:\x0e # ctrl+n
-keybind = ctrl+k=text:\x10 # ctrl+p
-
+# <perfix>+k (open sesh picker)
+keybind = super+k=text:\x02\x4b

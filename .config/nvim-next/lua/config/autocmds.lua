@@ -21,3 +21,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.wo.conceallevel = 0
   end,
 })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("LspVolarFormat", { clear = true }),
+  desc = "Prevenir conflicto entre tsserver y volar",
+  callback = function()
+    local lspconfig = require("lspconfig")
+    lspconfig.volar.setup({
+      on_attach = function(client)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end,
+    })
+  end,
+})

@@ -4,40 +4,8 @@ local M = {}
 
 local appearance = wezterm.gui.get_appearance()
 
-local termEditors = { "hx", "nvim", "vim" }
-local winExt = ".exe" -- extension to add to match Windows process names
-
-local function isEditor(name)
-	if type(name) ~= "string" then
-		return nil
-	end
-	wezterm.log_info("@isEditor,name=" .. name)
-	for _, editor in pairs(termEditors) do
-		if name == editor then
-			return true
-		end
-		if name == editor .. winExt then
-			return true
-		end
-	end
-	return false
-end
-
-local function stdBasename(path)
-	local isWin = wezterm.target_triple == "x86_64-pc-windows-msvc"
-	if type(path) ~= "string" then
-		return nil
-	end
-	if isWin then
-		return path:gsub("(.*[/\\])(.*)", "%2")
-	else
-		return path:gsub("(.*/)(.*)", "%2")
-	end
-end
-
 local function isViProcess(pane)
-	local procName = stdBasename(pane:get_foreground_process_name())
-	return isEditor(procName)
+	return pane:get_user_vars().IS_NVIM == "true" or pane:get_foreground_process_name():find("n?vim")
 end
 
 -- public methods
@@ -71,6 +39,7 @@ M.conditionalResizePane = function(window, pane, pane_direction, vim_direction)
 end
 
 M.conditionalExecuteAction = function(window, pane, action_editor, action_native)
+	wezterm.log_info("@conditionalExecuteAction")
 	if isViProcess(pane) then
 		if action_editor then
 			window:perform_action(action_editor, pane)
